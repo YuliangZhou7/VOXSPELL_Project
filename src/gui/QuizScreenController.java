@@ -110,7 +110,6 @@ public class QuizScreenController implements ControlledScreen{
     @Override
     public void setup() {
         _enableInput = new SimpleBooleanProperty(this,"_enableInput",true);
-        //_submit.disableProperty().bind(_enableInput);
         _enableInput.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -130,7 +129,7 @@ public class QuizScreenController implements ControlledScreen{
 
     @Override
     public void displayScreen() {
-
+        _textfield.setText("");
     }
 
 

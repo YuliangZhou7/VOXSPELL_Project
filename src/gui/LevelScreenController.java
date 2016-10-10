@@ -27,6 +27,32 @@ public class LevelScreenController implements Initializable,ControlledScreen {
     private MasterController _myParentController;
     @FXML
     private ChoiceBox<String> _quizType;
+    @FXML
+    private Button _startQuiz;
+    @FXML
+    private Button b1;
+    @FXML
+    private Button b2;
+    @FXML
+    private Button b3;
+    @FXML
+    private Button b4;
+    @FXML
+    private Button b5;
+    @FXML
+    private Button b6;
+    @FXML
+    private Button b7;
+    @FXML
+    private Button b8;
+    @FXML
+    private Button b9;
+    @FXML
+    private Button b10;
+    @FXML
+    private Button b11;
+
+    private String _selectedLevel;
 
     /**
      * Intializes the fields for the Choicebox after the fxml annotated members have been injected.
@@ -54,23 +80,50 @@ public class LevelScreenController implements Initializable,ControlledScreen {
     @Override
     public void displayScreen() {
         //TODO: set visible for level 1 to 11 and add tool tip for each level -> string for key in hashmap for level select
+
+        b1.setDisable(false);
+        b2.setDisable(false);
+        b3.setDisable(false);
+        b4.setDisable(false);
+        b5.setDisable(false);
+        b6.setDisable(false);
+        b7.setDisable(false);
+        b8.setDisable(false);
+        b9.setDisable(false);
+        b10.setDisable(false);
+        b11.setDisable(false);
+        _startQuiz.setDisable(true);
     }
 
     private String getChoice(ChoiceBox<String> _quizType){
         return _quizType.getValue();
     }
 
-    /**
-     * This method is called whenever a level tile button is clicked. Switches the scene to
-     * quizScreen and calls the setupTest method in the MasterController.
-     * @param event
-     */
+    public void levelButtonPressed(ActionEvent event){
+        b1.setDisable(false);
+        b2.setDisable(false);
+        b3.setDisable(false);
+        b4.setDisable(false);
+        b5.setDisable(false);
+        b6.setDisable(false);
+        b7.setDisable(false);
+        b8.setDisable(false);
+        b9.setDisable(false);
+        b10.setDisable(false);
+        b11.setDisable(false);
+        Button b = (Button)event.getSource();
+        b.setDisable(true);
+        _selectedLevel = b.getText();
+        _startQuiz.setDisable(false);
+    }
+
     public void enterNewQuiz(ActionEvent event){
+        _startQuiz.setDisable(true);
         //switch into the quiz menu screen
         _myParentController.setScreen(Main.Screen.QUIZ);
 
         //extracting the text on the button
-        String level = "Level "+((Button) event.getSource()).getText();
+        String level = "Level "+_selectedLevel;
         boolean isRevision = false;
         //checking which option the user chose for the quiz type
         if( getChoice(_quizType).equals("Revision Quiz")){
@@ -88,26 +141,6 @@ public class LevelScreenController implements Initializable,ControlledScreen {
             nextScreen.setupTest(level, false);
         }
 
-        //prevents user from accidentally double clicking the button.
-        Button myButton = ((Button) event.getSource());
-        new Thread() {
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        myButton.setDisable(true);
-                    }
-                });
-                try {
-                    Thread.sleep(3000); //3 seconds
-                }catch(InterruptedException ex) {
-                }
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        myButton.setDisable(false);
-                    }
-                });
-            }
-        }.start();
     }
 
     /**

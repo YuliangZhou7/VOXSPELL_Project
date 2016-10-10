@@ -25,14 +25,14 @@
             <HBox prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#okButtonPressed" style="-fx-background-color: ffffff;" text="OK">
+                  <Button mnemonicParsing="false" onAction="#okButtonPressed" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="OK">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="_cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" style="-fx-background-color: ffffff;" text="Cancel">
+                  <Button fx:id="_cancelButton" mnemonicParsing="false" onAction="#cancelButtonPressed" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Cancel">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="16.0" />
                      </font>
                   </Button>
                </children>
@@ -74,9 +74,9 @@
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button fx:id="_testButton" mnemonicParsing="false" onAction="#testFestival" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: ffffff;" text="Test">
+                        <Button fx:id="_testButton" mnemonicParsing="false" onAction="#testFestival" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Test">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="16.0" />
                            </font>
                         </Button>
                      </children>
@@ -89,9 +89,9 @@
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#fileChooserOpened" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: ffffff;" text="File Select">
+                        <Button mnemonicParsing="false" onAction="#fileChooserOpened" prefWidth="120.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="File Select">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="16.0" />
                            </font>
                         </Button>
                      </children>
@@ -104,9 +104,9 @@
                            </font>
                         </Label>
                         <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#clearStatsButtonPressed" style="-fx-background-color: ffffff;" text="Clear">
+                        <Button mnemonicParsing="false" onAction="#clearStatsButtonPressed" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Clear">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="16.0" />
                            </font>
                         </Button>
                      </children>

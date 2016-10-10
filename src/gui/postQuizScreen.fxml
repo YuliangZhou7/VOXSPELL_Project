@@ -24,22 +24,22 @@
          <center>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="_nextLevelButton" mnemonicParsing="false" onAction="#nextLevelButtonPressed" prefHeight="120.0" prefWidth="150.0" text="Next Level">
+                  <Button fx:id="_nextLevelButton" mnemonicParsing="false" onAction="#nextLevelButtonPressed" prefHeight="120.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: c7f392;" text="Next Level">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="_reviewButton" mnemonicParsing="false" onAction="#reviewLevelButtonPressed" prefHeight="120.0" prefWidth="150.0" text="Review Level">
+                  <Button fx:id="_reviewButton" mnemonicParsing="false" onAction="#reviewLevelButtonPressed" prefHeight="120.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: c7f392;" text="Review Level">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#returnToTitleButtonPressed" prefHeight="120.0" prefWidth="150.0" text="Main Menu">
+                  <Button mnemonicParsing="false" onAction="#returnToTitleButtonPressed" prefHeight="120.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: c7f392;" text="Main Menu">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="_playVideoButton" mnemonicParsing="false" onAction="#playVideoButtonPressed" prefHeight="120.0" prefWidth="150.0" text="Play Video">
+                  <Button fx:id="_playVideoButton" mnemonicParsing="false" onAction="#playVideoButtonPressed" prefHeight="120.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: c7f392;" text="Play Video">
                      <font>
                         <Font size="18.0" />
                      </font>
