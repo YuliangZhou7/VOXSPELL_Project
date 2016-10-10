@@ -23,6 +23,7 @@ import javafx.stage.Screen;
 import javafx.util.Duration;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,15 +35,21 @@ import java.util.HashMap;
  * Also contains the DatabaseIO object for opening and saving the SpellingDatabase object
  * which contains all the spelling words and user stats. All screens has a reference to the
  * MasterController to switch screens, request info from database, etc.
+ * TODO: different spelling lists and .ser objects
  * Created by Samule Li and Yuliang Zhou on 5/09/16.
  */
 public class MasterController extends StackPane {
     private HashMap< Main.Screen, Node> _screens;
     private HashMap< Main.Screen, ControlledScreen> _controllers;
 
+    private File _defaultFile;
+
     private DatabaseIO _dataIO;
 
     private SpellingDatabase _spellingDatabase;
+
+    private String _voice;
+    private String _voiceSpeed;
 
 
     public MasterController(){
@@ -50,7 +57,15 @@ public class MasterController extends StackPane {
         _screens = new HashMap<>();
         _controllers = new HashMap<>();
         _dataIO = new DatabaseIO();
-        _spellingDatabase = _dataIO.openData();
+        _defaultFile = new File(".defaultSpellingData.ser");
+        _spellingDatabase = _dataIO.openData(_defaultFile);
+        _voice = "Default";
+        _voiceSpeed = "1.00";
+    }
+
+    public SpellingDatabase getCurrentSpellilngModel(){
+        //TODO: hashmap< spelling list name, spellingdatabase > for different spelling databases?
+        return null;
     }
 
     /**
@@ -80,6 +95,18 @@ public class MasterController extends StackPane {
             _spellingDatabase.clearStats();
         }
     }
+
+    public String get_voice() {
+        return _voice;
+    }
+
+    public void set_voice(String _voice) {
+        this._voice = _voice;
+    }
+
+    public String get_voiceSpeed() {return _voiceSpeed;}
+
+    public void set_voiceSpeed(String _voiceSpeed) { this._voiceSpeed = _voiceSpeed;}
 
 
     //===============================================SCREEN_OPERATIONS================================================//
@@ -194,7 +221,7 @@ public class MasterController extends StackPane {
      * to a hidden .ser file
      */
     public void saveData(){
-        _dataIO.writeData(_spellingDatabase);
+        _dataIO.writeData(_spellingDatabase, _defaultFile);
     }
 
     //debugging only

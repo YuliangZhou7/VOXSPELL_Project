@@ -9,6 +9,7 @@ import java.util.*;
 /**
  * SpellingDatabase is a serializable object and saves a HashMap of all the spelling words from each
  * level. With the level as the Key. It also stores the accuracy for each level.
+ * TODO
  * Created by Yuliang Zhou on 12/09/2016.
  */
 public class SpellingDatabase implements Serializable{
@@ -22,16 +23,12 @@ public class SpellingDatabase implements Serializable{
     private HashMap< String, Integer > _scoreForLevel;
     private HashMap< String, Integer > _attemptsForLevel;
 
-    private String _voice;
-    private String _voiceSpeed;
 
     public SpellingDatabase(){
         _spellingWords = new HashMap<>();
         _failedWords = new HashMap<>();
         _scoreForLevel = new HashMap<>();
         _attemptsForLevel = new HashMap<>();
-        _voice = "Default";
-        _voiceSpeed = "1.00";
     }
 
     /**
@@ -249,6 +246,7 @@ public class SpellingDatabase implements Serializable{
 
     /**
      * Returns an ArrayList of strings of the levels in the spelling database in order from lowest level to highest.
+     * From "Level 1" to "Level 11"
      * @return
      */
     public ArrayList<String> getAllLevels() {
@@ -278,17 +276,6 @@ public class SpellingDatabase implements Serializable{
         }
     }
 
-    public String get_voice() {
-        return _voice;
-    }
-
-    public void set_voice(String _voice) {
-        this._voice = _voice;
-    }
-
-    public String get_voiceSpeed() {return _voiceSpeed;}
-
-    public void set_voiceSpeed(String _voiceSpeed) { this._voiceSpeed = _voiceSpeed;}
 
     /**
      * Debugging purposes only

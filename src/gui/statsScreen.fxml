@@ -37,7 +37,7 @@
                <children>
                   <HBox>
                      <children>
-                        <Label text="Please select a level: " textFill="WHITE">
+                        <Label text="Please select a level: ">
                            <padding>
                               <Insets top="4.0" />
                            </padding>
@@ -47,7 +47,7 @@
                         </Label>
                         <ChoiceBox fx:id="_levelSelection" prefWidth="150.0" />
                         <Region HBox.hgrow="ALWAYS" />
-                        <Label fx:id="_accuracyForLevel" text="Accuracy: " textFill="WHITE">
+                        <Label fx:id="_accuracyForLevel" text="Accuracy: ">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

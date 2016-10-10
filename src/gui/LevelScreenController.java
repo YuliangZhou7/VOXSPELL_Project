@@ -53,7 +53,7 @@ public class LevelScreenController implements Initializable,ControlledScreen {
 
     @Override
     public void displayScreen() {
-
+        //TODO: set visible for level 1 to 11 and add tool tip for each level -> string for key in hashmap for level select
     }
 
     private String getChoice(ChoiceBox<String> _quizType){

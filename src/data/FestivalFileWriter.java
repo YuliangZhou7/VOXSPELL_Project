@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class FestivalFileWriter {
 
     private static FestivalFileWriter _instance;
-    private static File _festivalSCM;
-    private static ArrayList<String> _lines;
+    private File _festivalSCM;
+    private  ArrayList<String> _lines;
 
     public static FestivalFileWriter getInstance(){
         if (_instance==null){
@@ -22,11 +22,15 @@ public class FestivalFileWriter {
         return _instance;
     }
 
-    public FestivalFileWriter(){
+    private FestivalFileWriter(){
         _festivalSCM = new File(".festival.scm");
     }
 
-    public static void changeVoice(String firstLine){
+    /**
+     * Changes first line of scm file
+     * @param firstLine
+     */
+    public void changeVoice(String firstLine){
         _lines = new ArrayList<>();
         try{
             FileReader fr = new FileReader(_festivalSCM);
@@ -53,8 +57,12 @@ public class FestivalFileWriter {
             ex.printStackTrace();
         }
     }
-    
-    public static void changeSpeed(String secondLine){
+
+    /**
+     * Changes the speed of the scm file to the specified speed given as a parameter.
+     * @param speed
+     */
+    public void changeSpeed(String speed){
         _lines = new ArrayList<>();
         try{
             FileReader fr = new FileReader(_festivalSCM);
@@ -70,7 +78,7 @@ public class FestivalFileWriter {
             BufferedWriter out = new BufferedWriter(fw);
             for(int i=0;i<_lines.size();i++){
                 if(i==1){//replace first line
-                    out.write(secondLine+"\n");
+                    out.write("(Parameter.set 'Duration_Stretch " + speed + ")" + "\n");
                 }else {
                     out.write(_lines.get(i)+"\n");
                 }
@@ -82,7 +90,11 @@ public class FestivalFileWriter {
         }
     }
 
-    public static void changeSpeechText(String thirdLine){
+    /**
+     * Changes last line of scm file to read out the phrase specified as a parameter.
+     * @param phrase
+     */
+    public void changeSpeechText(String phrase){
         _lines = new ArrayList<>();
         try{
             FileReader fr = new FileReader(_festivalSCM);
@@ -98,7 +110,7 @@ public class FestivalFileWriter {
             BufferedWriter out = new BufferedWriter(fw);
             for(int i=0;i<_lines.size();i++){
                 if(i==2){//replace first line
-                    out.write(thirdLine+"\n");
+                    out.write("(SayText \"" + phrase + "\")" + "\n");
                 }else {
                     out.write(_lines.get(i)+"\n");
                 }
@@ -110,10 +122,5 @@ public class FestivalFileWriter {
         }
     }
 
-    public static void main(String[] args){
-        FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
-        FestivalFileWriter.getInstance().changeSpeed("(Parameter.set 'Duration_Stretch 1.5)");
-        FestivalFileWriter.getInstance().changeSpeechText("(SayText \"YASSSSSSSSSSSSSSS\")");
-    }
 
 }

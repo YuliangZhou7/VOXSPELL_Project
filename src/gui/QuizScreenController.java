@@ -1,5 +1,6 @@
 package gui;
 
+import data.FestivalFileWriter;
 import data.SpellingDatabase;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -347,8 +348,8 @@ public class QuizScreenController implements ControlledScreen{
      */
     public void read(String phrase) {
         System.out.println("FESTIVAL: " + phrase);
-        //_festival.set_phrase(phrase);
-        //_festival.restart();
+        FestivalFileWriter.getInstance().changeSpeechText(phrase);
+        _festival.restart();
     }
 
     public static boolean is_enableInput() {

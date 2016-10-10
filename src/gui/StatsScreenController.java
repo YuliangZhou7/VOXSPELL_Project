@@ -13,7 +13,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
- *
+ * TODO: javadoc
+ * TODO: allow user to use file selector to add another spelling word list
  * Author: Yuliang Zhou 7/09/2016
  */
 public class StatsScreenController implements ControlledScreen{
