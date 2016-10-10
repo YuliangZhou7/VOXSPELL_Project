@@ -8,12 +8,15 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,10 +90,16 @@ public class SettingsScreenController implements ControlledScreen{
         _myParentScreensController.setScreen(Main.Screen.TITLE);
     }
 
-    /**
-     * Once the okay button is pressed, this method is called.
-     * @throws IOException
-     */
+    public void fileChooserOpened(ActionEvent actionEvent) {
+        FileChooser fc = new FileChooser();
+        fc.setInitialDirectory(new File("."));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files(.txt)", "*.txt"));
+        File selectedFile = fc.showOpenDialog(Main.getStage());
+        if (selectedFile != null) {
+            System.out.println(selectedFile.toPath());
+        }
+    }
+
     public void okButtonPressed() throws IOException, InterruptedException {
         if(getChoice(_voiceSelect).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
@@ -156,4 +165,6 @@ public class SettingsScreenController implements ControlledScreen{
     public static void set_enableInput(boolean _enableInput) {
         SettingsScreenController._enableInput.set(_enableInput);
     }
+
+
 }

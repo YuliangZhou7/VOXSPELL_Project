@@ -5,11 +5,14 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
     private MasterController _mainContainer;
+
+    private static Stage _stage;
 
     //Set enums for each screen that has been loaded.
     public enum Screen{TITLE,QUIZ,LEVELSELECT,POSTQUIZ,SETTINGS,STATS,VIDEO};
@@ -25,6 +28,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        _stage = primaryStage;
         //loading in all the screens in the main container.
         _mainContainer = new MasterController();
         _mainContainer.loadScreen(Screen.TITLE,titleScreenFXML);
@@ -56,6 +60,10 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+    }
+
+    public static Stage getStage() {
+        return _stage;
     }
 
     /**
