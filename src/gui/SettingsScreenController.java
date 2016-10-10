@@ -117,6 +117,11 @@ public class SettingsScreenController implements ControlledScreen{
         });
     }
 
+    @Override
+    public void displayScreen() {
+
+    }
+
     /**
      * when the test button is clicked it will test out the voice settings you've selected.
      */

@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
  * depending on their decision at the choicebox _quizType.
  * Created by Samule Li on 13/09/16.
  */
-public class LevelController implements Initializable,ControlledScreen {
+public class LevelScreenController implements Initializable,ControlledScreen {
     
     ObservableList<String> _quizTypeList;
     private MasterController _myParentController;
@@ -48,6 +48,11 @@ public class LevelController implements Initializable,ControlledScreen {
 
     @Override
     public void setup() {
+
+    }
+
+    @Override
+    public void displayScreen() {
 
     }
 

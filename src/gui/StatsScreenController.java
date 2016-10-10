@@ -75,6 +75,11 @@ public class StatsScreenController implements ControlledScreen{
         screenOpened();
     }
 
+    @Override
+    public void displayScreen() {
+
+    }
+
     /**
      * This method is called immediately after the screen is set and updates the table view.
      */

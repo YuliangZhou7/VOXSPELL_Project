@@ -93,6 +93,12 @@ public class PostQuizController implements ControlledScreen{
     @Override
     public void setup() {
     }
+
+    @Override
+    public void displayScreen() {
+
+    }
+
     // sets the fields of the test results of the current level.
     public void set_testResults(String level, double accuracy, int correct, int total){
         _level = level;

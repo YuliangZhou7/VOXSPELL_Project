@@ -127,6 +127,11 @@ public class QuizScreenController implements ControlledScreen{
         _database = _myParentController.getDatabase();
     }
 
+    @Override
+    public void displayScreen() {
+
+    }
+
 
     //==========================================SPELLING_LOGIC=====================================================//
 

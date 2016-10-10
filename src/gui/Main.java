@@ -53,12 +53,7 @@ public class Main extends Application {
         primaryStage.setTitle("VOXSPELL Spelling App");
         //Setting the first stage as the titleScreen.
         primaryStage.setScene(scene);
-        
-        primaryStage.setMaxHeight(425);
-        primaryStage.setMaxWidth(675);
-        primaryStage.setMinHeight(425);
-        primaryStage.setMinWidth(650);
-
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }

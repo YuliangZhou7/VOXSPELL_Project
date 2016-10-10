@@ -116,4 +116,9 @@ public class VideoPlayerController implements Initializable, ControlledScreen{
     public void setup() {
 
     }
+
+    @Override
+    public void displayScreen() {
+
+    }
 }

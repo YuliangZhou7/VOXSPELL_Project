@@ -16,19 +16,24 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TitleScreenController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="650.0" pickOnBounds="true">
+      <ImageView fitHeight="600.0" fitWidth="850.0" pickOnBounds="true">
          <image>
-            <Image url="@../resources/images/mesh-1430107_960_720.png" />
+            <Image url="@../resources/images/background.png" />
          </image>
       </ImageView>
-      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" style="-fx-background-image: url(src/resources/background.jpg);">
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" style="-fx-background-image: url(src/resources/background.jpg);">
          <center>
             <VBox alignment="CENTER" prefHeight="150.0" spacing="15.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="_startButton" alignment="CENTER" mnemonicParsing="false" onAction="#startButtonPressed" prefWidth="150.0" text="Start Quiz">
+                  <Button fx:id="_startButton" alignment="CENTER" mnemonicParsing="false" onAction="#normalQuizPressed" prefWidth="150.0" text="Normal Quiz">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#customQuizButtonPressed" prefWidth="150.0" text="Custom Quiz">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -63,9 +68,9 @@
          <bottom>
             <HBox BorderPane.alignment="CENTER">
                <children>
-                  <Label text="Welcome to Sam &amp; Yuliang's VOXSPELL" />
+                  <Label text="Welcome to Yuliang's VOXSPELL" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="Version 1.0" />
+                  <Label text="Version 1.1" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" />
@@ -75,7 +80,7 @@
          <top>
             <ImageView fitHeight="100.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../resources/images/cooltext204690010199180.png" />
+                  <Image url="@../resources/images/VOXSPELL_title.png" />
                </image>
                <BorderPane.margin>
                   <Insets left="50.0" right="50.0" top="50.0" />

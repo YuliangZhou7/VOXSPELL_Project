@@ -28,12 +28,21 @@ public class TitleScreenController implements ControlledScreen{
     @Override
     public void setup() {}
 
+    @Override
+    public void displayScreen() {
+
+    }
+
     /**
      * Requests main screen controller to switch to the quiz scene.
      * Uses a fade in and out transition.
      */
-    public void startButtonPressed(){
+    public void normalQuizPressed(){
         _myParentScreensController.setScreen(Main.Screen.LEVELSELECT);
+    }
+
+    public void customQuizButtonPressed(){
+        //_myParentScreensController.setScreen(Main.Screen.CUSTOMLEVEL);
     }
 
     /**

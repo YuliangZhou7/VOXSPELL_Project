@@ -2,7 +2,6 @@ package gui;
 
 import data.DatabaseIO;
 import data.SpellingDatabase;
-import data.SpellingLogic;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -132,6 +131,7 @@ public class MasterController extends StackPane {
      */
     public boolean setScreen(Main.Screen name) {
         if (_screens.get(name) != null) { //screen loaded
+            _controllers.get(name).displayScreen();
             final DoubleProperty opacity = opacityProperty();
             if (!getChildren().isEmpty()) {
                 //fade out/fade in transition
