@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="650.0" pickOnBounds="true">
          <image>
-            <Image url="@../resources/mesh-1430107_960_720.png" />
+            <Image url="@../resources/images/mesh-1430107_960_720.png" />
          </image>
       </ImageView>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" style="-fx-background-image: url(src/resources/background.jpg);">
@@ -75,7 +75,7 @@
          <top>
             <ImageView fitHeight="100.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../resources/cooltext204690010199180.png" />
+                  <Image url="@../resources/images/cooltext204690010199180.png" />
                </image>
                <BorderPane.margin>
                   <Insets left="50.0" right="50.0" top="50.0" />

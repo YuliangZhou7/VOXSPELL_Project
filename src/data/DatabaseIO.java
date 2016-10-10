@@ -15,11 +15,9 @@ import java.io.*;
 public class DatabaseIO {
 
     private File _hiddenFile;
-    private File _wordListFile;
 
     public DatabaseIO(){
         _hiddenFile = new File(".spellingData.ser");
-        _wordListFile = new File("NZCER-spelling-lists.txt");
     }
 
     /**
@@ -89,7 +87,6 @@ public class DatabaseIO {
         try {
             InputStream in = DatabaseIO.class.getResourceAsStream("/resources/NZCER-spelling-lists.txt");
             InputStreamReader fr = new InputStreamReader(in);
-            //FileReader fr = new FileReader(_wordListFile);
             BufferedReader br = new BufferedReader(fr);
             String line;
             String levelKey = "";
@@ -98,7 +95,6 @@ public class DatabaseIO {
                     levelKey = line.substring(1);
                 }else{
                     database.addNewWord(levelKey, line.trim());
-                    System.out.println(line);
                 }
             }
             br.close();

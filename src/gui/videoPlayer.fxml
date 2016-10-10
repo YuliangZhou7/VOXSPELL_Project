@@ -24,7 +24,7 @@
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/playbutton.png" />
+                        <Image url="@../resources/images/playbutton.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -36,7 +36,7 @@
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/rewind.png" />
+                        <Image url="@../resources/images/rewind.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -48,7 +48,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/fastforward.png" />
+                        <Image url="@../resources/images/fastforward.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -60,7 +60,7 @@
                <graphic>
                   <ImageView fitHeight="63.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/pause.png" />
+                        <Image url="@../resources/images/pause.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -72,7 +72,7 @@
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/reload.png" />
+                        <Image url="@../resources/images/reload.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -84,7 +84,7 @@
                <graphic>
                   <ImageView fitHeight="76.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/return.png" />
+                        <Image url="@../resources/images/return.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -93,7 +93,7 @@
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/sound.png" />
+                        <Image url="@../resources/images/sound.png" />
                      </image>
                   </ImageView>
                </graphic>
