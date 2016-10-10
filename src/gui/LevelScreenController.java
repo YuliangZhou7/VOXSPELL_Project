@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
  * depending on their decision at the choicebox _quizType.
  * Created by Samule Li on 13/09/16.
  */
-public class LevelScreenController implements Initializable,ControlledScreen {
+public class LevelScreenController implements ControlledScreen {
     
     ObservableList<String> _quizTypeList;
     private MasterController _myParentController;
@@ -54,18 +54,6 @@ public class LevelScreenController implements Initializable,ControlledScreen {
 
     private String _selectedLevel;
 
-    /**
-     * Intializes the fields for the Choicebox after the fxml annotated members have been injected.
-     * Gives the Choicebox the options "New Quiz" and "Revision Quiz"
-     * @param location
-     * @param resources
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        _quizTypeList = FXCollections.observableArrayList("New Quiz","Revision Quiz");
-        _quizType.setItems(_quizTypeList);
-        _quizType.setValue("New Quiz");
-    }
 
     @Override
     public void setScreenParent(MasterController screenParent) {
@@ -74,7 +62,9 @@ public class LevelScreenController implements Initializable,ControlledScreen {
 
     @Override
     public void setup() {
-
+        _quizTypeList = FXCollections.observableArrayList("New Quiz","Revision Quiz");
+        _quizType.setItems(_quizTypeList);
+        _quizType.setValue("New Quiz");
     }
 
     @Override
@@ -93,7 +83,9 @@ public class LevelScreenController implements Initializable,ControlledScreen {
         b10.setDisable(false);
         b11.setDisable(false);
         _startQuiz.setDisable(true);
+        _quizType.setValue("New Quiz");
     }
+
 
     private String getChoice(ChoiceBox<String> _quizType){
         return _quizType.getValue();

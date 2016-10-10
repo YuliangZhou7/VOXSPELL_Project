@@ -97,7 +97,7 @@ public class SettingsScreenController implements ControlledScreen{
         File selectedFile = fc.showOpenDialog(Main.getStage());
         if (selectedFile != null) {
             System.out.println(selectedFile.toPath());
-            //TODO
+            //TODO: add file and make new spellingdatabase object for the file
         }
     }
 
@@ -110,7 +110,6 @@ public class SettingsScreenController implements ControlledScreen{
             FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)\n");
             FestivalFileWriter.getInstance().changeSpeed(getChoice(_voiceSpeed));
         }
-        //TODO add filechooser
         //TODO add another ser file
         _myParentScreensController.set_voice(getChoice(_voiceSelect));
         _myParentScreensController.set_voiceSpeed(getChoice(_voiceSpeed));

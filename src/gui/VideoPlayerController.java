@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by samule on 20/09/16.
+ * Created by Samule Li on 20/09/16.
  */
 public class VideoPlayerController implements ControlledScreen{
 
@@ -39,7 +39,7 @@ public class VideoPlayerController implements ControlledScreen{
     @Override
     public void setup() {
         //locates the file location of play.mp4
-        File file = new File("./src/resources/play.mp4");
+        File file = new File("./resources/play.mp4");
         //converts the media path to a URI.
         _media = new Media(file.toURI().toString());
         _mediaPlayer = new MediaPlayer(_media);

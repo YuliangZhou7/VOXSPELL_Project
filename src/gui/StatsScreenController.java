@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 /**
  * TODO: javadoc
- * TODO: allow user to use file selector to add another spelling word list
+ * TODO: allow user to change between different spellinglists
+ * TODO: add a pie chart
  * Author: Yuliang Zhou 7/09/2016
  */
 public class StatsScreenController implements ControlledScreen{
