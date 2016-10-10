@@ -23,43 +23,38 @@
       </ImageView>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" style="-fx-background-image: url(src/resources/background.jpg);">
          <center>
-            <VBox alignment="CENTER" prefHeight="150.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="150.0" spacing="40.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="_startButton" alignment="CENTER" mnemonicParsing="false" onAction="#normalQuizPressed" prefWidth="150.0" text="Normal Quiz">
+                  <Button fx:id="_startButton" alignment="CENTER" mnemonicParsing="false" onAction="#normalQuizPressed" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 20;" text="Normal Quiz">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font size="14.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#customQuizButtonPressed" prefWidth="150.0" text="Custom Quiz">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="_displayStatsButton" mnemonicParsing="false" onAction="#displayStatsButtonPressed" prefWidth="150.0" text="View Statistics">
+                  <Button fx:id="_displayStatsButton" mnemonicParsing="false" onAction="#displayStatsButtonPressed" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 20;" text="View Statistics">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font size="14.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="_settingsButton" mnemonicParsing="false" onAction="#settingsButtonPressed" prefWidth="150.0" text="Settings">
+                  <Button fx:id="_settingsButton" mnemonicParsing="false" onAction="#settingsButtonPressed" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 20;" text="Settings">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font size="14.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="_quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefWidth="150.0" text="Quit">
+                  <Button fx:id="_quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 20;" text="Quit">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <font>
-                        <Font size="14.0" />
+                        <Font size="20.0" />
                      </font>
                   </Button>
                </children>
