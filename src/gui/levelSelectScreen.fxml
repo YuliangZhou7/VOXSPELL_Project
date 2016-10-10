@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LevelController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="650.0" pickOnBounds="true">
+         <image>
+            <Image url="@../resources/mesh-1430107_960_720.png" />
+         </image>
+      </ImageView>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <HBox spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Quiz Type:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="_quizType" prefWidth="150.0" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#backButtonPressed" text="Back">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="1" textAlignment="CENTER">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="5" textAlignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="2" textAlignment="CENTER" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="6" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="9" textAlignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="3" textAlignment="CENTER" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="7" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="4" textAlignment="CENTER" GridPane.columnIndex="3">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="8" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="10" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="70.0" prefWidth="70.0" text="11" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Abyssinica SIL" size="28.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="46.25" right="46.25" top="10.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="162.5" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="162.5" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="162.5" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="162.5" />
+               </columnConstraints>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <rowConstraints>
+                  <RowConstraints minHeight="-Infinity" prefHeight="90.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="-Infinity" prefHeight="90.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="-Infinity" prefHeight="90.0" />
+               </rowConstraints>
+            </GridPane>
+         </center>
+         <top>
+            <Label text="Level Select" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
