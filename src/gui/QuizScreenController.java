@@ -163,9 +163,11 @@ public class QuizScreenController implements ControlledScreen{
 
     /**
      * This method is called from LevelScreenController and PostQuizController after the screen is set.
-     * @param levelKey, revision mode
+     * @param levelKey String
+     * @param isRevision boolean
+     * @return boolean  returns false if there are no words from that level
      */
-    public void setupTest(String levelKey,boolean isRevision){
+    public boolean setupTest(String levelKey,boolean isRevision){
         //setup pretest state
         _currentLevel = levelKey;
         _isRevision = isRevision;
@@ -181,8 +183,7 @@ public class QuizScreenController implements ControlledScreen{
 
         //if there are no words - from revision mode
         if( _wordList.length == 0){
-            completeTestSaveData();
-            return;
+            return false;
         }
 
         //Commence test
@@ -193,6 +194,7 @@ public class QuizScreenController implements ControlledScreen{
         _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
         _accuracy.setText("Accuracy: "+0.0+"%");
         _tooltip.setText("");
+        return true;
     }
 
 

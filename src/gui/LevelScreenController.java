@@ -111,8 +111,6 @@ public class LevelScreenController implements ControlledScreen {
 
     public void enterNewQuiz(ActionEvent event){
         _startQuiz.setDisable(true);
-        //switch into the quiz menu screen
-        _myParentController.setScreen(Main.Screen.QUIZ);
 
         //extracting the text on the button
         String level = "Level "+_selectedLevel;
@@ -124,13 +122,21 @@ public class LevelScreenController implements ControlledScreen {
         else if( getChoice(_quizType).equals("New Quiz")){
             isRevision = false;
         }
-
+        boolean enabledQuiz;
         //get the QuizScreen Controller and setup the test
         QuizScreenController nextScreen = (QuizScreenController) _myParentController.getScreenController(Main.Screen.QUIZ);
         if(isRevision) {
-            nextScreen.setupTest(level, true);
+            enabledQuiz = nextScreen.setupTest(level, true);
         }else{
-            nextScreen.setupTest(level, false);
+            enabledQuiz = nextScreen.setupTest(level, false);
+        }
+
+        if(enabledQuiz){
+            //switch into the quiz menu screen
+            _myParentController.setScreen(Main.Screen.QUIZ);
+        }else{
+            DialogBox.errorDialogBox("VOXSPELL","No words to review :)");
+            _startQuiz.setDisable(false);
         }
 
     }

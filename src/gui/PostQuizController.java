@@ -77,12 +77,17 @@ public class PostQuizController implements ControlledScreen{
      * @param event
      */
     public void reviewLevelButtonPressed(ActionEvent event){
-        //change into the review quiz screen
-        _myParentController.setScreen(Main.Screen.QUIZ);
 
         //get the QuizScreen Controller
         QuizScreenController nextScreen = (QuizScreenController)_myParentController.getScreenController(Main.Screen.QUIZ);
-        nextScreen.setupTest(_level,true);
+        boolean enabledQuiz = nextScreen.setupTest(_level,true);
+
+        if(enabledQuiz){
+            //change into the review quiz screen
+            _myParentController.setScreen(Main.Screen.QUIZ);
+        }else{
+            DialogBox.errorDialogBox("VOXSPELL","No words to review :)");
+        }
     }
 
     @Override
