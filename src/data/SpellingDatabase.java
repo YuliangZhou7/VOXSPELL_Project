@@ -19,7 +19,7 @@ public class SpellingDatabase implements Serializable{
     private HashMap< String, ArrayList<Word> > _spellingWords;
     private HashMap< String, ArrayList<Word> > _failedWords;
 
-    //TODO: change scoring system - 100pts Mastered, 75Faulted?, 0 failed
+    //TODO: change scoring system - 100pts Mastered, 50Faulted, 0 failed
     //4pts for Mastered, 2pts for Faulted, 0pts for Failed
     private HashMap< String, Integer > _scoreForLevel;
     private HashMap< String, Integer > _attemptsForLevel;
@@ -207,7 +207,7 @@ public class SpellingDatabase implements Serializable{
      */
     public double getAccuracyScore(String level){
         if( _scoreForLevel.containsKey(level) || _attemptsForLevel.containsKey(level) ){
-            return ( (double) _scoreForLevel.get(level)/(_attemptsForLevel.get(level)*4) )*100;
+            return ( (double) _scoreForLevel.get(level)/(_attemptsForLevel.get(level)*100) )*100;
         }else{
             return 0.0;
         }

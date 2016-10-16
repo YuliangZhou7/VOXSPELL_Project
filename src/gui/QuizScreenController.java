@@ -155,6 +155,9 @@ public class QuizScreenController implements ControlledScreen{
     private Status _status;
 
     //4pts for mastered, 2pts for faulted, 0pts failed
+    private int _masteredScore = 100;
+    private int _faultedScore = 50;
+    private int _failedScore = 0;
     private String[] _results;
     private int _score;
 
@@ -205,7 +208,7 @@ public class QuizScreenController implements ControlledScreen{
 
                 //UPDATE SCORE 4pts MASTERED
                 _results[_position] = "MASTERED";
-                _score+=4;
+                _score+=_masteredScore;
 
                 //MOVE ONTO NEXT WORD
                 _position++;
@@ -227,7 +230,7 @@ public class QuizScreenController implements ControlledScreen{
 
                 //UPDATE SCORE 2pts FAULTED
                 _results[_position] = "FAULTED";
-                _score+=2;
+                _score+=_faultedScore;
 
                 //MOVE ONTO NEXT WORD
                 _position++;
@@ -242,6 +245,7 @@ public class QuizScreenController implements ControlledScreen{
 
                 //UPDATE SCORE 0pts FAILED
                 _results[_position] = "FAILED";
+                _score+=_failedScore;
 
                 //MOVE ONTO NEXT WORD
                 _position++;
@@ -262,7 +266,7 @@ public class QuizScreenController implements ControlledScreen{
         //System.out.println("total:"+(_position)*4);
 
         //update accuracy rating
-        double accuracy = ((double) _score / (_position * 4)) * 100;
+        double accuracy = ((double) _score / (_position * _masteredScore)) * 100;
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
         if(Double.isNaN(accuracy)){
@@ -315,7 +319,7 @@ public class QuizScreenController implements ControlledScreen{
         }
 
         _database.addScore(_score,_wordList.length,_currentLevel);
-        double accuracy = ((double) _score / (_results.length * 4)) * 100;
+        double accuracy = ((double) _score / (_results.length * _masteredScore)) * 100;
         if(Double.isNaN(accuracy)){
            accuracy = 0.0;
         }
@@ -330,11 +334,6 @@ public class QuizScreenController implements ControlledScreen{
         _textfield.setText("");
     }
 
-    public String get_userAttempt() {
-        //return _userAttempt.get();
-        return _userAttempt;
-    }
-
     /**
      * Uses the Festival Service class to read the phrase.
      * @param phrase
@@ -347,10 +346,6 @@ public class QuizScreenController implements ControlledScreen{
 
     public static boolean is_enableInput() {
         return _enableInput.get();
-    }
-
-    public static BooleanProperty _enableInputProperty() {
-        return _enableInput;
     }
 
     public static void set_enableInput(boolean _enableInput) {
