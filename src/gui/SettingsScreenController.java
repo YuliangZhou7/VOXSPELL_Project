@@ -34,7 +34,7 @@ public class SettingsScreenController implements ControlledScreen{
     private ObservableList<String> _voiceTypeList;
     private ObservableList<String> _voiceSpeedList;
 
-    private Festival _festival = new Festival();
+    private Festival _festival;
     private static BooleanProperty _enableInput;
 
 
@@ -58,6 +58,7 @@ public class SettingsScreenController implements ControlledScreen{
 
     @Override
     public void setup() {
+        _festival = new Festival();
         _voiceTypeList = FXCollections.observableArrayList("Default","New Zealand");
         _voiceSelect.setItems(_voiceTypeList);
         _voiceSelect.setValue(_myParentScreensController.get_voice());
@@ -80,14 +81,12 @@ public class SettingsScreenController implements ControlledScreen{
 
     @Override
     public void displayScreen() {
-        //TODO: save previous voice and speed into temp variable
-
         _voiceSelect.setValue(_myParentScreensController.get_voice());
         _voiceSpeed.setValue(_myParentScreensController.get_voiceSpeed());
     }
 
-    public void cancelButtonPressed(){
-        _myParentScreensController.setScreen(Main.Screen.TITLE);
+    public void clearStatsButtonPressed(){
+        _myParentScreensController.requestClearStats();
     }
 
     public void fileChooserOpened(ActionEvent actionEvent) {
@@ -101,56 +100,37 @@ public class SettingsScreenController implements ControlledScreen{
         }
     }
 
-    public void okButtonPressed() throws IOException, InterruptedException {
-        if(getChoice(_voiceSelect).equals("Default")){
+    public void backButtonPressed() throws IOException, InterruptedException {
+        if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
-            FestivalFileWriter.getInstance().changeSpeed(getChoice(_voiceSpeed));
+            FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue());
         }
-        else if(getChoice(_voiceSelect).equals("New Zealand")){
-            FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)\n");
-            FestivalFileWriter.getInstance().changeSpeed(getChoice(_voiceSpeed));
+        else if((_voiceSelect.getValue()).equals("New Zealand")){
+            FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
+            FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue());
         }
         //TODO add another ser file
-        _myParentScreensController.set_voice(getChoice(_voiceSelect));
-        _myParentScreensController.set_voiceSpeed(getChoice(_voiceSpeed));
+        _myParentScreensController.set_voice(_voiceSelect.getValue());
+        _myParentScreensController.set_voiceSpeed(_voiceSpeed.getValue());
         _myParentScreensController.setScreen(Main.Screen.TITLE);
-    }
-
-
-
-    public void clearStatsButtonPressed(){
-        _myParentScreensController.requestClearStats();
-    }
-
-    private String getChoice(ChoiceBox<String> _voiceSelect){
-        return _voiceSelect.getValue();
     }
 
     /**
      * when the test button is clicked it will test out the voice settings you've selected.
      */
     public void testFestival() throws IOException, InterruptedException {
-        if(getChoice(_voiceSelect).equals("Default")){
-            String cmd = "sed -i \"1s/.*/(voice_kal_diphone)/\" ./resources/festival.scm";
-            String cmd2 ="sed -i \"2s/.*/(Parameter.set 'Duration_Stretch "+getChoice(_voiceSpeed)+")/\" ./resources/festival.scm";
-            ProcessBuilder pb = new ProcessBuilder("/bin/bash","-c",cmd);
-            Process process = pb.start();
-            process.waitFor();
-            ProcessBuilder pb2= new ProcessBuilder("/bin/bash", "-c",cmd2);
-            Process process2 = pb2.start();
+        if((_voiceSelect.getValue()).equals("Default")){
+            FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
+            FestivalFileWriter.getInstance().changeSpeechText("Hello. I am the default voice.");
         }
-        else if(getChoice(_voiceSelect).equals("New Zealand")){
-            String cmd = "sed -i \"1s/.*/(voice_akl_nz_jdt_diphone)/\" ./resources/festival.scm";
-            String cmd2 = "sed -i \"2s/.*/(Parameter.set 'Duration_Stretch "+getChoice(_voiceSpeed)+")/\" ./resources/festival.scm";
-            ProcessBuilder pb = new ProcessBuilder("/bin/bash","-c",cmd);
-            Process process = pb.start();
-            process.waitFor();
-            ProcessBuilder pb2= new ProcessBuilder("/bin/bash", "-c",cmd2);
-            Process process2 = pb2.start();
+        else if((_voiceSelect.getValue()).equals("New Zealand")){
+            FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
+            FestivalFileWriter.getInstance().changeSpeechText("Hello. I am the New Zealand voice.");
         }
-        _myParentScreensController.set_voice(getChoice(_voiceSelect));
-        _myParentScreensController.set_voiceSpeed(getChoice(_voiceSpeed));
-        //_festival.set_phrase("Testing the current voice settings");
+        FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue().toString());
+        _myParentScreensController.set_voice(_voiceSelect.getValue());
+        _myParentScreensController.set_voiceSpeed(_voiceSpeed.getValue());
+        //read out the test phrase
         _festival.restart();
     }
 

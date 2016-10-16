@@ -121,6 +121,15 @@ public class MasterController extends StackPane {
         }
     }
 
+
+    /**
+     * Calls the writeData() method in the DatabaseIO object to save the spelling data
+     * to a hidden .ser file
+     */
+    public void saveData(){
+        _dataIO.writeData(_spellingDatabase, _defaultFile);
+    }
+
     /**
      * Loads the fxml file and injects the screenPane into the controller. Then calls the setup method
      * on the screen controllers to do pre-display setup.
@@ -214,14 +223,6 @@ public class MasterController extends StackPane {
         } else {
             return true;
         }
-    }
-
-    /**
-     * Calls the writeData() method in the DatabaseIO object to save the spelling data
-     * to a hidden .ser file
-     */
-    public void saveData(){
-        _dataIO.writeData(_spellingDatabase, _defaultFile);
     }
 
     //debugging only

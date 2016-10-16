@@ -49,48 +49,6 @@ public class QuizScreenController implements ControlledScreen{
     private Button _submit;
     @FXML
     private Button _repeat;
-    /**
-     * reads out the word that needs to be spelt, can be pressed multiple times without penalty.
-     * @param event
-     */
-    public void repeatButtonPressed(ActionEvent event){
-        read(_wordList[_position]);
-        //sets focus onto textfield after repeated word.
-        _textfield.requestFocus();
-    }
-
-
-    /**
-     * Allows user to quit the current quiz and abandon current progress to go back to the main title screen.
-     * @param event
-     */
-    public void abortQuizButtonPressed(ActionEvent event){
-        boolean confirm = DialogBox.displayConfirmDialogBox("Quit current quiz","Are you sure you wish to " +
-                "quit current quiz. Unsaved progress will be lost");
-        if(confirm) {
-            _myParentController.setScreen(Main.Screen.TITLE);
-        }
-    }
-
-    /**
-     * enteredWord is called whenever Enter button is pressed or enter key is pressed, it takes the user input from the
-     * textfield and checks if the word matches the proposed word.
-     */
-    public void enteredWord(ActionEvent event) {
-        if(is_enableInput()){
-            if(_textfield.getText().equals("")){
-                _tooltip.setText("Please enter a word");
-            }else if(_textfield.getText().matches(".*\\d+.*")){
-                _tooltip.setText("Please do not enter numbers");
-            }else if( _status.equals(Status.SECONDATTEMPT) && get_userAttempt().equals(_textfield.getText()) ) {
-                _tooltip.setText("Please try a different spelling");
-            }else{
-                _userAttempt.set(_textfield.getText());
-            }
-            _textfield.setText("");
-            _textfield.requestFocus();
-        }
-    }
 
     /**
      * This method sets the the MasterController as the parent controller for the quiz controller
@@ -133,13 +91,59 @@ public class QuizScreenController implements ControlledScreen{
     }
 
 
+    /**
+     * reads out the word that needs to be spelt, can be pressed multiple times without penalty.
+     * @param event
+     */
+    public void repeatButtonPressed(ActionEvent event){
+        read(_wordList[_position]);
+        //sets focus onto textfield after repeated word.
+        _textfield.requestFocus();
+    }
+
+    /**
+     * Allows user to quit the current quiz and abandon current progress to go back to the main title screen.
+     * @param event
+     */
+    public void abortQuizButtonPressed(ActionEvent event){
+        boolean confirm = DialogBox.displayConfirmDialogBox("Quit current quiz","Are you sure you wish to " +
+                "quit current quiz. Unsaved progress will be lost");
+        if(confirm) {
+            _myParentController.setScreen(Main.Screen.TITLE);
+        }
+    }
+
+    /**
+     * enteredWord is called whenever Enter button is pressed or enter key is pressed, it takes the user input from the
+     * textfield and checks if the word matches the proposed word.
+     */
+    public void enteredWord(ActionEvent event) {
+        if(is_enableInput()){
+            if(_textfield.getText().equals("")){
+                _tooltip.setText("Please enter a word");
+            }else if(_textfield.getText().matches(".*\\d+.*")){
+                _tooltip.setText("Please do not enter numbers");
+            }else{
+                //_userAttempt.set(_textfield.getText());
+                _userAttempt=_textfield.getText();
+                _tooltip.setText("");
+                checkUserAttempt();
+            }
+            _textfield.setText("");
+            _textfield.requestFocus();
+        }
+    }
+
+
+
+
     //==========================================SPELLING_LOGIC=====================================================//
 
     private enum Status{FIRSTATTEMPT,SECONDATTEMPT};
 
     private SpellingDatabase _database;
 
-    private StringProperty _userAttempt;
+    private String _userAttempt;
 
     //level and mode
     private boolean _isRevision;
@@ -155,7 +159,7 @@ public class QuizScreenController implements ControlledScreen{
     private int _score;
 
     /**
-     * This method is called by the MasterController after the screen is set.
+     * This method is called from LevelScreenController and PostQuizController after the screen is set.
      * @param levelKey, revision mode
      */
     public void setupTest(String levelKey,boolean isRevision){
@@ -178,16 +182,6 @@ public class QuizScreenController implements ControlledScreen{
             return;
         }
 
-        //StringProperty for user's attempt which is used to check the spelling against database
-        _userAttempt = new SimpleStringProperty(this,"_userAttempt","");
-        _userAttempt.addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                _tooltip.setText("");
-                checkUserAttempt();
-            }
-        });
-
         //Commence test
         read("Please spell: " + _wordList[_position]);
         //set progress label and progress bar and accuracy
@@ -200,15 +194,14 @@ public class QuizScreenController implements ControlledScreen{
 
 
     /**
-     * This method is called whenever the user attempt string property is changed. This occurs
-     * when the user enters a word. Checks if the user's attempt is same as the correct spelling
-     * of the word. Ignores case.
-     * @return
+     * This method is called whenever the user attempt string is changed. This occurs when the user enters a word.
+     * Checks if the user's attempt is same as the correct spelling of the word. Ignores case.
+     * @return void
      */
     private void checkUserAttempt(){
         boolean completed = false;
         if (_status == Status.FIRSTATTEMPT) {//================================================================MASTERED
-            if (_wordList[_position].toLowerCase().equals(_userAttempt.getValue().toLowerCase())) {
+            if (_wordList[_position].toLowerCase().equals(_userAttempt.toLowerCase())) {
 
                 //UPDATE SCORE 4pts MASTERED
                 _results[_position] = "MASTERED";
@@ -230,7 +223,7 @@ public class QuizScreenController implements ControlledScreen{
                 _status = Status.SECONDATTEMPT;
             }
         } else {//==============================================================================================FAULTED
-            if (_wordList[_position].toLowerCase().equals(_userAttempt.getValue().toLowerCase())) {
+            if (_wordList[_position].toLowerCase().equals(_userAttempt.toLowerCase())) {
 
                 //UPDATE SCORE 2pts FAULTED
                 _results[_position] = "FAULTED";
@@ -338,7 +331,8 @@ public class QuizScreenController implements ControlledScreen{
     }
 
     public String get_userAttempt() {
-        return _userAttempt.get();
+        //return _userAttempt.get();
+        return _userAttempt;
     }
 
     /**

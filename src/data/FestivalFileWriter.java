@@ -60,7 +60,7 @@ public class FestivalFileWriter {
 
     /**
      * Changes the speed of the scm file to the specified speed given as a parameter.
-     * @param speed
+     * @param speed - e.g "1.0"
      */
     public void changeSpeed(String speed){
         _lines = new ArrayList<>();
