@@ -51,7 +51,7 @@ public class StatsScreenController implements ControlledScreen{
     @Override
     public void setup() {
         //get database object
-        _database = _myParentScreensController.getDatabase();
+        _database = _myParentScreensController.getCurrentSpellilngModel();
 
         //setup combobox selection
         ArrayList<String> levels = _database.getAllLevels();

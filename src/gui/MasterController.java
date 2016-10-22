@@ -1,6 +1,7 @@
 package gui;
 
 import data.DatabaseIO;
+import data.DatabaseManager;
 import data.SpellingDatabase;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -39,6 +40,7 @@ import java.util.HashMap;
  * Created by Samule Li and Yuliang Zhou on 5/09/16.
  */
 public class MasterController extends StackPane {
+
     private HashMap< Main.Screen, Node> _screens;
     private HashMap< Main.Screen, ControlledScreen> _controllers;
 
@@ -46,7 +48,9 @@ public class MasterController extends StackPane {
 
     private DatabaseIO _dataIO;
 
-    private SpellingDatabase _spellingDatabase;
+    private DatabaseManager _spellingDatabase;
+    private ArrayList<String> _spellingListKeys;
+    private String _currentSpellingList;
 
     private String _voice;
     private String _voiceSpeed;
@@ -57,15 +61,12 @@ public class MasterController extends StackPane {
         _screens = new HashMap<>();
         _controllers = new HashMap<>();
         _dataIO = new DatabaseIO();
-        _defaultFile = new File(".defaultSpellingData.ser");
+        _defaultFile = new File(".spellingData.ser");
         _spellingDatabase = _dataIO.openData(_defaultFile);
+        _spellingListKeys = _spellingDatabase.getSpellingKeys();
+        _currentSpellingList = "Default";
         _voice = "Default";
         _voiceSpeed = "1.00";
-    }
-
-    public SpellingDatabase getCurrentSpellilngModel(){
-        //TODO: hashmap< spelling list name, spellingdatabase > for different spelling databases?
-        return null;
     }
 
     /**
@@ -79,11 +80,12 @@ public class MasterController extends StackPane {
     }
 
     /**
-     * Returns a reference to the spelling database object
+     * Returns a reference to the spelling database object specified by the key. Returns null if there
+     * is no spelling list associated with the key.
      * @return
      */
-    public SpellingDatabase getDatabase() {
-        return _spellingDatabase;
+    public SpellingDatabase getCurrentSpellilngModel() {
+        return _spellingDatabase.getSpellingList(_currentSpellingList);
     }
 
     /**
@@ -92,7 +94,7 @@ public class MasterController extends StackPane {
     public void requestClearStats() {
         boolean clearTrue = DialogBox.displayConfirmDialogBox("Clear User Statistics", "Are you sure you want to clear all user data?");
         if(clearTrue){
-            _spellingDatabase.clearStats();
+            _spellingDatabase.clearAllStats();
         }
     }
 
@@ -123,7 +125,7 @@ public class MasterController extends StackPane {
 
 
     /**
-     * Calls the writeData() method in the DatabaseIO object to save the spelling data
+     * Calls the writeData() method in the DatabaseIO object to save the spelling DatabaseManager object
      * to a hidden .ser file
      */
     public void saveData(){
@@ -223,11 +225,6 @@ public class MasterController extends StackPane {
         } else {
             return true;
         }
-    }
-
-    //debugging only
-    public void printdatabase(){
-        _spellingDatabase.printDatabase();
     }
 
 

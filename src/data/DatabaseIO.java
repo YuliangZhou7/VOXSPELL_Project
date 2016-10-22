@@ -6,11 +6,10 @@ import gui.Main;
 import java.io.*;
 
 /**
- * DatabaseIO object manages all object serialization. Reads SpellingDatabase object from .ser file
+ * DatabaseIO object manages all object serialization. Reads DatabaseManager object from .ser file
  * into an object. Writes the SpellingDatabase object into a hidden .ser file.
  * Also reads spelling list text file and appends the words to the SpellingDatabase object upon opening
  * the object.
- * TODO: allow for different .ser files for different lists
  * Created by Yuliang Zhou on 8/09/2016.
  */
 public class DatabaseIO {
@@ -22,13 +21,13 @@ public class DatabaseIO {
      * @param inputFile
      * @return
      */
-    public SpellingDatabase openData(File inputFile) {
-        SpellingDatabase data = null;
+    public DatabaseManager openData(File inputFile) {
+        DatabaseManager data = null;
         if(inputFile.exists()){
             try {
                 FileInputStream streamIn = new FileInputStream(inputFile);
                 ObjectInputStream objectinputstream = new ObjectInputStream(streamIn);
-                data = (SpellingDatabase) objectinputstream.readObject();
+                data = (DatabaseManager) objectinputstream.readObject();
                 streamIn.close();
                 objectinputstream.close();
                 System.out.println("Open old object");
@@ -37,22 +36,22 @@ public class DatabaseIO {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }else{//if serialized data does not exist then create a new object
-            data = new SpellingDatabase();
+        }else{//if serialized data does not exist then create a new DatabaseManager and add "Default" spelling list
+            data = new DatabaseManager();
+            updateDefaultWordList(data);
             System.out.println("New object created");
         }
-        updateDefaultWordList(data);
         return data;
     }
 
 
     /**
-     * Saves the SpellingStatsModel object instance to a hidden .ser file.
+     * Saves the DatabaseManager object instance to a hidden .ser file.
      * Called when main GUI frame is closed.
      * @param data
      * @param out
      */
-    public void writeData(SpellingDatabase data,File out){
+    public void writeData(DatabaseManager data, File out){
         if(!out.exists()){ //create hidden .ser file if it does not exist
             try {
                 out.createNewFile();
@@ -81,7 +80,7 @@ public class DatabaseIO {
      * This method is called after reading the data.
      * @param database
      */
-    public void updateDefaultWordList(SpellingDatabase database){
+    public void updateDefaultWordList(DatabaseManager database){
         try {
             InputStream in = DatabaseIO.class.getResourceAsStream("/resources/Default_Spelling_List.txt");
             InputStreamReader fr = new InputStreamReader(in);
@@ -92,7 +91,7 @@ public class DatabaseIO {
                 if(line.charAt(0) == '%' ){//get level key
                     levelKey = line.substring(1);
                 }else{
-                    database.addNewWord(levelKey, line.trim());
+                    database.addNewDefaultWord(levelKey, line.trim());
                 }
             }
             br.close();
@@ -104,12 +103,14 @@ public class DatabaseIO {
     }
 
     /**
-     * Reads each line of the specified spelling list file (given as the second parameter) and appends any new words
-     * to the SpellingDatabase object.
+     * Reads each line of the .txt file and appends words to each level to a SpellingDatabase object.
+     * Returns true if the spelling list is compatible.
+     * TODO
      * @param database
      * @param customSpellingList
+     * @return
      */
-    public void updateWordList(SpellingDatabase database, File customSpellingList){
+    public boolean updateWordList(SpellingDatabase database, File customSpellingList){
         try {
             FileReader fr = new FileReader(customSpellingList);
             BufferedReader br = new BufferedReader(fr);
@@ -125,9 +126,12 @@ public class DatabaseIO {
             br.close();
         } catch (FileNotFoundException e) {
             DialogBox.errorDialogBox("Error","Could not find spelling list text file. Please refer to README and try again.");
+            return false;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
 }

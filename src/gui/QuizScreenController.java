@@ -82,7 +82,7 @@ public class QuizScreenController implements ControlledScreen{
             }
         });
         _festival = new Festival();
-        _database = _myParentController.getDatabase();
+        _database = _myParentController.getCurrentSpellilngModel();
     }
 
     @Override
