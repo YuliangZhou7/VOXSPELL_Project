@@ -77,7 +77,7 @@ public class DatabaseIO {
     /**
      * Reads each line of the default word list file and adds any new words to current word list object
      * in SpellingStatsModel.
-     * This method is called after reading the data.
+     * This method is called only when a new DatabaseManager is created.
      * @param database
      */
     public void updateDefaultWordList(DatabaseManager database){
@@ -110,7 +110,7 @@ public class DatabaseIO {
      * @param customSpellingList
      * @return
      */
-    public boolean updateWordList(SpellingDatabase database, File customSpellingList){
+    public boolean readNewWordList(SpellingDatabase database, File customSpellingList){
         try {
             FileReader fr = new FileReader(customSpellingList);
             BufferedReader br = new BufferedReader(fr);
@@ -118,6 +118,7 @@ public class DatabaseIO {
             String levelKey = "";
             while((line = br.readLine())!=null){
                 if(line.charAt(0) == '%' ){//get level key
+                    //TODO: if not "Level ??" throw error???
                     levelKey = line.substring(1);
                 }else{
                     database.addNewWord(levelKey, line.trim());

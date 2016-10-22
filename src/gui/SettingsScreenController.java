@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -45,7 +46,7 @@ public class SettingsScreenController implements ControlledScreen{
     @FXML
     private ChoiceBox<String> _voiceSpeed;
     @FXML
-    private Button _okButton;
+    private ChoiceBox<String> _spellingLists;
 
     /**
      * Sets the parent controller to the MasterController. Then gets a reference to the spelling database object
@@ -57,16 +58,26 @@ public class SettingsScreenController implements ControlledScreen{
     }
 
     @Override
+    public void displayScreen() {
+        _voiceSelect.setValue(_myParentScreensController.get_voice());
+        _voiceSpeed.setValue(_myParentScreensController.get_voiceSpeed());
+    }
+
+    @Override
     public void setup() {
         _festival = new Festival();
+        //setup voice type
         _voiceTypeList = FXCollections.observableArrayList("Default","New Zealand");
         _voiceSelect.setItems(_voiceTypeList);
         _voiceSelect.setValue(_myParentScreensController.get_voice());
-        _voiceSpeedList = FXCollections.observableArrayList("1.00","1.25","1.50","1.75","2.00");
+        //setup voice speed
+        _voiceSpeedList = FXCollections.observableArrayList("0.5","1.00","1.50","2.00");//TODO: 0.5 = slower, 2.0 = faster
         _voiceSpeed.setItems(_voiceSpeedList);
         _voiceSpeed.setValue(_myParentScreensController.get_voiceSpeed());
         _enableInput = new SimpleBooleanProperty(this,"_enableInput",true);
-
+        //setup spelling list combobox
+        updateSpellingListComboBox();
+        //prevent double clicking test button
         _enableInput.addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -79,51 +90,53 @@ public class SettingsScreenController implements ControlledScreen{
         });
     }
 
-    @Override
-    public void displayScreen() {
-        _voiceSelect.setValue(_myParentScreensController.get_voice());
-        _voiceSpeed.setValue(_myParentScreensController.get_voiceSpeed());
-    }
-
-    public void clearStatsButtonPressed(){
-        _myParentScreensController.requestClearStats();
-    }
-
+    /**
+     * Opens a new file chooser window. Once a .txt file is selected, it is passed to the DatabaseIO to read
+     * the file and save it as a new SpellingDatabase object inside the DatabaseManager.ser object.
+     * ComboBox is then updated accordingly.
+     * @param actionEvent
+     */
     public void fileChooserOpened(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File("."));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files(.txt)", "*.txt"));
         File selectedFile = fc.showOpenDialog(Main.getStage());
         if (selectedFile != null) {
-            System.out.println(selectedFile.toPath());
-            //TODO: add file and make new spellingdatabase object for the file
+            _myParentScreensController.addSpellingFile(selectedFile);
+            updateSpellingListComboBox();
         }
+    }
+
+
+    private void updateSpellingListComboBox() {
+        List<String> list = _myParentScreensController.getSpellingListKeys();
+        ObservableList obList = FXCollections.observableList(list);
+        _spellingLists.setItems(obList);
+        _spellingLists.setValue(_myParentScreensController.get_currentSpellingList());
+    }
+
+    public void clearStatsButtonPressed(){
+        _myParentScreensController.requestClearStats();
     }
 
     public void backButtonPressed() throws IOException, InterruptedException {
         if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
             FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue());
-        }
-        else if((_voiceSelect.getValue()).equals("New Zealand")){
+        }else if((_voiceSelect.getValue()).equals("New Zealand")){
             FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
             FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue());
         }
-        //TODO add another ser file
         _myParentScreensController.set_voice(_voiceSelect.getValue());
         _myParentScreensController.set_voiceSpeed(_voiceSpeed.getValue());
         _myParentScreensController.setScreen(Main.Screen.TITLE);
     }
 
-    /**
-     * when the test button is clicked it will test out the voice settings you've selected.
-     */
     public void testFestival() throws IOException, InterruptedException {
         if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
             FestivalFileWriter.getInstance().changeSpeechText("Hello. I am the default voice.");
-        }
-        else if((_voiceSelect.getValue()).equals("New Zealand")){
+        }else if((_voiceSelect.getValue()).equals("New Zealand")){
             FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
             FestivalFileWriter.getInstance().changeSpeechText("Hello. I am the New Zealand voice.");
         }

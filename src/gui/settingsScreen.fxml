@@ -78,13 +78,18 @@
                   </HBox>
                   <HBox prefHeight="73.0" prefWidth="610.0">
                      <children>
-                        <Label prefHeight="25.0" prefWidth="214.0" text="Add Custom Spelling List" textFill="WHITE">
+                        <Label prefHeight="25.0" prefWidth="214.0" text="Spelling Lists" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#fileChooserOpened" prefWidth="120.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="File Select">
+                        <ChoiceBox fx:id="_spellingLists" prefWidth="150.0" style="-fx-background-color: ffffff;">
+                           <HBox.margin>
+                              <Insets right="10.0" top="5.0" />
+                           </HBox.margin>
+                        </ChoiceBox>
+                        <Button mnemonicParsing="false" onAction="#fileChooserOpened" prefWidth="120.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Add File">
                            <font>
                               <Font size="16.0" />
                            </font>

@@ -26,6 +26,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -63,7 +64,7 @@ public class MasterController extends StackPane {
         _dataIO = new DatabaseIO();
         _defaultFile = new File(".spellingData.ser");
         _spellingDatabase = _dataIO.openData(_defaultFile);
-        _spellingListKeys = _spellingDatabase.getSpellingKeys();
+        _spellingListKeys = getSpellingListKeys();
         _currentSpellingList = "Default";
         _voice = "Default";
         _voiceSpeed = "1.00";
@@ -89,13 +90,45 @@ public class MasterController extends StackPane {
     }
 
     /**
+     * Returns a list of all the spelling lists currently added to the DatabaseManager object
+     * @return
+     */
+    public ArrayList<String> getSpellingListKeys(){
+        _spellingListKeys = _spellingDatabase.getSpellingKeys();
+        return _spellingListKeys;
+    }
+
+    /**
+     * TODO: read file -> SpellingDatabase object
+     * TODO: add object to DatabaseManager -> addNewSpellingList()
+     * @param file
+     */
+    public void addSpellingFile(File file) {
+        SpellingDatabase newList = new SpellingDatabase();
+        boolean isSuccessful = _dataIO.readNewWordList(newList,file);
+        if(isSuccessful){
+            _spellingDatabase.addNewSpellingList(file.getName(),newList);
+        }else{
+            DialogBox.errorDialogBox("Error","Sorry incorrect format given. Please refer to help and try again.");
+        }
+    }
+
+    /**
      *  Checks if user really wants to delete data before deleting.
      */
     public void requestClearStats() {
         boolean clearTrue = DialogBox.displayConfirmDialogBox("Clear User Statistics", "Are you sure you want to clear all user data?");
-        if(clearTrue){
+        if (clearTrue) {
             _spellingDatabase.clearAllStats();
         }
+    }
+
+    public String get_currentSpellingList() {
+        return _currentSpellingList;
+    }
+
+    public void set_currentSpellingList(String _currentSpellingList) {
+        this._currentSpellingList = _currentSpellingList;
     }
 
     public String get_voice() {
@@ -111,7 +144,10 @@ public class MasterController extends StackPane {
     public void set_voiceSpeed(String _voiceSpeed) { this._voiceSpeed = _voiceSpeed;}
 
 
+
     //===============================================SCREEN_OPERATIONS================================================//
+
+
 
     /**
      * Show dialog box to confirm if user wants to close program.
@@ -207,15 +243,6 @@ public class MasterController extends StackPane {
     /**
      *
      * @param name
-     * @return node with appropriate name
-     */
-    public Node getScreen(Main.Screen name){
-        return _screens.get(name);
-    }
-
-    /**
-     *
-     * @param name
      * @return
      */
     public boolean unloadScreen(Main.Screen name) {
@@ -226,6 +253,5 @@ public class MasterController extends StackPane {
             return true;
         }
     }
-
 
 }

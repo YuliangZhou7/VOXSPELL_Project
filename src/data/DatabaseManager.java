@@ -1,5 +1,7 @@
 package data;
 
+import gui.DialogBox;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +12,6 @@ import java.util.HashMap;
  */
 public class DatabaseManager implements Serializable{
 
-    //TODO: dont let any other spelling lists use existing key
     private HashMap<String , SpellingDatabase > _spellingLists;
 
     /**
@@ -22,7 +23,11 @@ public class DatabaseManager implements Serializable{
     }
 
     public void addNewSpellingList(String nameOfList, SpellingDatabase newList){
-        _spellingLists.put(nameOfList,newList);//TODO: Caused by: java.lang.NullPointerException
+        if(_spellingLists.containsKey(nameOfList)){
+            DialogBox.errorDialogBox("Error","This file has already been added.");
+        }else {
+            _spellingLists.put(nameOfList, newList);
+        }
     }
 
     public void addNewDefaultWord(String levelKey, String word) {
@@ -30,7 +35,14 @@ public class DatabaseManager implements Serializable{
         defaultList.addNewWord(levelKey,word);
     }
 
+    /**
+     * Loops through each spelling list and clears the statistics of each list.
+     * No spelling list is deleted - only the scores
+     */
     public void clearAllStats() {
+        for(String key : _spellingLists.keySet()){
+            _spellingLists.get(key).clearStats();
+        }
     }
 
     /**
