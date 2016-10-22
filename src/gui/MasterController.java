@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
@@ -37,7 +38,7 @@ import java.util.HashMap;
  * Also contains the DatabaseIO object for opening and saving the SpellingDatabase object
  * which contains all the spelling words and user stats. All screens has a reference to the
  * MasterController to switch screens, request info from database, etc.
- * TODO: different spelling lists and .ser objects
+ *
  * Created by Samule Li and Yuliang Zhou on 5/09/16.
  */
 public class MasterController extends StackPane {
@@ -99,8 +100,8 @@ public class MasterController extends StackPane {
     }
 
     /**
-     * TODO: read file -> SpellingDatabase object
-     * TODO: add object to DatabaseManager -> addNewSpellingList()
+     * Called from Settings screen. Uses the DatabaseIO object to read the file and creates a new SpellingDatabase
+     * object from it. Then adds the new SpellingDatabase object to the DatabaseManager if it's not already contained.
      * @param file
      */
     public void addSpellingFile(File file) {
@@ -113,6 +114,10 @@ public class MasterController extends StackPane {
         }
     }
 
+    public boolean isLastLevel(int level) {
+        return getCurrentSpellilngModel().isLastLevel(level);
+    }
+
     /**
      *  Checks if user really wants to delete data before deleting.
      */
@@ -122,6 +127,8 @@ public class MasterController extends StackPane {
             _spellingDatabase.clearAllStats();
         }
     }
+
+
 
     public String get_currentSpellingList() {
         return _currentSpellingList;
@@ -253,5 +260,6 @@ public class MasterController extends StackPane {
             return true;
         }
     }
+
 
 }

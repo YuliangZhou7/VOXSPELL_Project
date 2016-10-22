@@ -104,6 +104,7 @@ public class SettingsScreenController implements ControlledScreen{
         if (selectedFile != null) {
             _myParentScreensController.addSpellingFile(selectedFile);
             updateSpellingListComboBox();
+            _spellingLists.setValue(selectedFile.getName());
         }
     }
 

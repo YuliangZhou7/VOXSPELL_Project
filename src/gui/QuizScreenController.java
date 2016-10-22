@@ -147,7 +147,8 @@ public class QuizScreenController implements ControlledScreen{
 
     //level and mode
     private boolean _isRevision;
-    private String _currentLevel;
+    private int _levelInt;
+    private String _currentLevel; //"Level 5" or "small animals" actual key
 
     //words
     private String[] _wordList;
@@ -163,21 +164,23 @@ public class QuizScreenController implements ControlledScreen{
 
     /**
      * This method is called from LevelScreenController and PostQuizController after the screen is set.
-     * @param levelKey String
+     * @param level int
      * @param isRevision boolean
      * @return boolean  returns false if there are no words from that level
      */
-    public boolean setupTest(String levelKey,boolean isRevision){
+    public boolean setupTest(int level,boolean isRevision){
         //setup pretest state
-        _currentLevel = levelKey;
+        _database = _myParentController.getCurrentSpellilngModel();
+        _levelInt = level;
+        _currentLevel = _database.getActualKey(level);
         _isRevision = isRevision;
         _position = 0;
         _score = 0;
         _status = Status.FIRSTATTEMPT;
         if(_isRevision) {
-            _wordList = _database.getReviewQuiz(levelKey);
+            _wordList = _database.getReviewQuiz(_currentLevel);
         }else{
-            _wordList = _database.getNormalQuiz(levelKey);
+            _wordList = _database.getNormalQuiz(_currentLevel);
         }
         _results = new String[_wordList.length];
 
@@ -328,7 +331,7 @@ public class QuizScreenController implements ControlledScreen{
 
         //get the PostQuizScreen Controller object
         PostQuizController nextScreen = ((PostQuizController)_myParentController.getScreenController(Main.Screen.POSTQUIZ));
-        nextScreen.set_testResults(_currentLevel,accuracy,correctCount,_wordList.length);
+        nextScreen.set_testResults(_levelInt,accuracy,correctCount,_wordList.length); //_currentLevel-"Level 5" or "small animals"
         nextScreen.showResults();
 
         //change screen

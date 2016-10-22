@@ -1,18 +1,17 @@
 package gui;
 
-import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.awt.*;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -25,6 +24,9 @@ public class LevelScreenController implements ControlledScreen {
     
     ObservableList<String> _quizTypeList;
     private MasterController _myParentController;
+
+    @FXML
+    private ChoiceBox<String> _spellingLists;
     @FXML
     private ChoiceBox<String> _quizType;
     @FXML
@@ -52,7 +54,7 @@ public class LevelScreenController implements ControlledScreen {
     @FXML
     private Button b11;
 
-    private String _selectedLevel;
+    private int _selectedIntLevel;
 
 
     @Override
@@ -65,12 +67,65 @@ public class LevelScreenController implements ControlledScreen {
         _quizTypeList = FXCollections.observableArrayList("New Quiz","Revision Quiz");
         _quizType.setItems(_quizTypeList);
         _quizType.setValue("New Quiz");
+
+        _spellingLists.getSelectionModel().selectedItemProperty().addListener(new ChangeListener(){
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                if(newValue!=null) {
+                    _myParentController.set_currentSpellingList((String) newValue);
+                    setButtons();
+                }
+            }
+        });
     }
 
     @Override
     public void displayScreen() {
-        //TODO: set visible for level 1 to 11 and add tool tip for each level -> string for key in hashmap for level select
+        List<String> list = _myParentController.getSpellingListKeys();
+        ObservableList obList = FXCollections.observableList(list);
+        _spellingLists.setItems(obList);
+        _spellingLists.setValue(_myParentController.get_currentSpellingList());
+        setButtons();
+    }
 
+    public void setButtons(){
+        b1.setVisible(false);
+        b2.setVisible(false);
+        b3.setVisible(false);
+        b4.setVisible(false);
+        b5.setVisible(false);
+        b6.setVisible(false);
+        b7.setVisible(false);
+        b8.setVisible(false);
+        b9.setVisible(false);
+        b10.setVisible(false);
+        b11.setVisible(false);
+        Set<Integer> s = _myParentController.getCurrentSpellilngModel().getLevelNumbers();
+        for (Integer level :s){
+            if(level==1){
+                b1.setVisible(true);
+            }else if(level==2){
+                b2.setVisible(true);
+            }else if(level==3){
+                b3.setVisible(true);
+            }else if(level==4){
+                b4.setVisible(true);
+            }else if(level==5){
+                b5.setVisible(true);
+            }else if(level==6){
+                b6.setVisible(true);
+            }else if(level==7){
+                b7.setVisible(true);
+            }else if(level==8){
+                b8.setVisible(true);
+            }else if(level==9){
+                b9.setVisible(true);
+            }else if(level==10){
+                b10.setVisible(true);
+            }else if(level==11){
+                b11.setVisible(true);
+            }
+        }
         b1.setDisable(false);
         b2.setDisable(false);
         b3.setDisable(false);
@@ -82,10 +137,10 @@ public class LevelScreenController implements ControlledScreen {
         b9.setDisable(false);
         b10.setDisable(false);
         b11.setDisable(false);
+
         _startQuiz.setDisable(true);
         _quizType.setValue("New Quiz");
     }
-
 
     private String getChoice(ChoiceBox<String> _quizType){
         return _quizType.getValue();
@@ -105,15 +160,15 @@ public class LevelScreenController implements ControlledScreen {
         b11.setDisable(false);
         Button b = (Button)event.getSource();
         b.setDisable(true);
-        _selectedLevel = b.getText();
+        _selectedIntLevel = Integer.parseInt(b.getText());
         _startQuiz.setDisable(false);
     }
 
     public void enterNewQuiz(ActionEvent event){
         _startQuiz.setDisable(true);
 
-        //extracting the text on the button
-        String level = "Level "+_selectedLevel;
+        _myParentController.set_currentSpellingList(_spellingLists.getValue());
+
         boolean isRevision = false;
         //checking which option the user chose for the quiz type
         if( getChoice(_quizType).equals("Revision Quiz")){
@@ -126,9 +181,9 @@ public class LevelScreenController implements ControlledScreen {
         //get the QuizScreen Controller and setup the test
         QuizScreenController nextScreen = (QuizScreenController) _myParentController.getScreenController(Main.Screen.QUIZ);
         if(isRevision) {
-            enabledQuiz = nextScreen.setupTest(level, true);
+            enabledQuiz = nextScreen.setupTest(_selectedIntLevel, true);
         }else{
-            enabledQuiz = nextScreen.setupTest(level, false);
+            enabledQuiz = nextScreen.setupTest(_selectedIntLevel, false);
         }
 
         if(enabledQuiz){

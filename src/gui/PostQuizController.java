@@ -3,13 +3,9 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -36,10 +32,25 @@ public class PostQuizController implements ControlledScreen{
     private Button _reviewButton;
 
 
-    private String _level;
+    private int _levelInt;
     private int _correct;
     private int _total;
     private double _accuracy;
+
+
+    @Override
+    public void setScreenParent(MasterController screenParent) {
+        _myParentController = screenParent;
+    }
+
+    @Override
+    public void setup() {
+    }
+
+    @Override
+    public void displayScreen() {
+    }
+
 
     public void returnToTitleButtonPressed(ActionEvent event){
         _myParentController.setScreen(Main.Screen.TITLE);
@@ -58,13 +69,11 @@ public class PostQuizController implements ControlledScreen{
      * This button is only enable if user scored 9 or more and the level is less than level 11.
      */
     public void nextLevelButtonPressed(ActionEvent event){
-        String[] level = _level.split(" ");
-        int nextLevelNumber = Integer.parseInt(level[1]);
-        nextLevelNumber++;
-        String nextLevel = "Level " + nextLevelNumber;
-
         //change into quiz screen
         _myParentController.setScreen(Main.Screen.QUIZ);
+
+        //next level number
+        int nextLevel = _levelInt + 1;
 
         //get the QuizScreen Controller
         QuizScreenController nextScreen = (QuizScreenController)_myParentController.getScreenController(Main.Screen.QUIZ);
@@ -77,10 +86,9 @@ public class PostQuizController implements ControlledScreen{
      * @param event
      */
     public void reviewLevelButtonPressed(ActionEvent event){
-
         //get the QuizScreen Controller
         QuizScreenController nextScreen = (QuizScreenController)_myParentController.getScreenController(Main.Screen.QUIZ);
-        boolean enabledQuiz = nextScreen.setupTest(_level,true);
+        boolean enabledQuiz = nextScreen.setupTest(_levelInt,true);
 
         if(enabledQuiz){
             //change into the review quiz screen
@@ -90,23 +98,9 @@ public class PostQuizController implements ControlledScreen{
         }
     }
 
-    @Override
-    public void setScreenParent(MasterController screenParent) {
-        _myParentController = screenParent;
-    }
-
-    @Override
-    public void setup() {
-    }
-
-    @Override
-    public void displayScreen() {
-
-    }
-
     // sets the fields of the test results of the current level.
-    public void set_testResults(String level, double accuracy, int correct, int total){
-        _level = level;
+    public void set_testResults(int level, double accuracy, int correct, int total){
+        _levelInt = level;
         _correct = correct;
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
@@ -122,19 +116,19 @@ public class PostQuizController implements ControlledScreen{
     public void showResults() {
         if (_total == 0) {
             _reviewButton.setDisable(true);
-            _userResultsOne.setText("Congratulations. No mistakes to review.");
+            _userResultsOne.setText("Congratulations.");
             _userResultsTwo.setText("Keep up the good work :)");
         }else {
             _reviewButton.setDisable(false);
             _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
-            _userResultsTwo.setText("Accuracy for  " + _level + ": " + _accuracy + "%");
+            _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
         }
         if(_correct>8){
             _playVideoButton.setDisable(false);
         }else{
             _playVideoButton.setDisable(true);
         }
-        if(_level.equals("Level 11") || _correct<9 ){
+        if(_accuracy<90.0 || _correct<9 || _myParentController.isLastLevel(_levelInt) ){
             _nextLevelButton.setDisable(true);
         }else{
             _nextLevelButton.setDisable(false);

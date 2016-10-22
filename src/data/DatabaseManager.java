@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * TODO: hashmap of all spelling lists SpellingDatabase objects
+ * TODO: option to delete spelling lists (except Default list)
  * Created by Yuliang on 22/10/2016.
  */
 public class DatabaseManager implements Serializable{
@@ -22,6 +22,12 @@ public class DatabaseManager implements Serializable{
         addNewSpellingList("Default",new SpellingDatabase());
     }
 
+    /**
+     * Adds the SpellingDatabase object if it hasn't already been added. Name of list is the
+     * name of the text file e.g. "animals.txt"
+     * @param nameOfList
+     * @param newList
+     */
     public void addNewSpellingList(String nameOfList, SpellingDatabase newList){
         if(_spellingLists.containsKey(nameOfList)){
             DialogBox.errorDialogBox("Error","This file has already been added.");
@@ -30,6 +36,11 @@ public class DatabaseManager implements Serializable{
         }
     }
 
+    /**
+     * Adds a word to the level (specified by the key e.g."small animals" or "Level 5" in the Default list
+     * @param levelKey
+     * @param word
+     */
     public void addNewDefaultWord(String levelKey, String word) {
         SpellingDatabase defaultList =_spellingLists.get("Default");
         defaultList.addNewWord(levelKey,word);
@@ -66,4 +77,30 @@ public class DatabaseManager implements Serializable{
         }
         return keys;
     }
+
+    /**
+     * Adds the key to default SpellingDatabase levels.
+     * @param levelCounter
+     * @param levelKey
+     */
+    public void addNewDefaultLevel(int levelCounter, String levelKey) {
+        SpellingDatabase defaultList =_spellingLists.get("Default");
+        defaultList.addNewLevel(levelCounter,levelKey);
+    }
+
+    /**
+     * Removes a SpellingDatabase object from the DatabaseManger. TODO: update comboboxes?
+     * @param spellingList
+     */
+    public void removeSpellingList(String spellingList){
+        if(spellingList.equals("Default")){
+            DialogBox.errorDialogBox("Cannot delete", "Sorry cannot delete the Default list.");
+        }else{
+            if(DialogBox.displayConfirmDialogBox("Deleting Spelling List","Deleting this list will " +
+                    "delete all progress. Are you sure?")) {
+                _spellingLists.remove(spellingList);
+            }
+        }
+    }
+
 }

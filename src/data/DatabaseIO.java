@@ -8,8 +8,8 @@ import java.io.*;
 /**
  * DatabaseIO object manages all object serialization. Reads DatabaseManager object from .ser file
  * into an object. Writes the SpellingDatabase object into a hidden .ser file.
- * Also reads spelling list text file and appends the words to the SpellingDatabase object upon opening
- * the object.
+ * Also reads spelling list text file and appends the words to the SpellingDatabase object
+ *
  * Created by Yuliang Zhou on 8/09/2016.
  */
 public class DatabaseIO {
@@ -30,7 +30,6 @@ public class DatabaseIO {
                 data = (DatabaseManager) objectinputstream.readObject();
                 streamIn.close();
                 objectinputstream.close();
-                System.out.println("Open old object");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
@@ -39,7 +38,6 @@ public class DatabaseIO {
         }else{//if serialized data does not exist then create a new DatabaseManager and add "Default" spelling list
             data = new DatabaseManager();
             updateDefaultWordList(data);
-            System.out.println("New object created");
         }
         return data;
     }
@@ -56,7 +54,7 @@ public class DatabaseIO {
             try {
                 out.createNewFile();
             } catch (IOException e) {
-                //error creating hidden .ser file
+                DialogBox.errorDialogBox("Error","Error saving data. Please refer to manual");
             }
         }
         //write SpellingStatsModel object instance's data to the hidden file
@@ -87,9 +85,12 @@ public class DatabaseIO {
             BufferedReader br = new BufferedReader(fr);
             String line;
             String levelKey = "";
+            int levelCounter = 0;
             while((line = br.readLine())!=null){
                 if(line.charAt(0) == '%' ){//get level key
+                    levelCounter++;
                     levelKey = line.substring(1);
+                    database.addNewDefaultLevel(levelCounter,levelKey);
                 }else{
                     database.addNewDefaultWord(levelKey, line.trim());
                 }
@@ -105,7 +106,6 @@ public class DatabaseIO {
     /**
      * Reads each line of the .txt file and appends words to each level to a SpellingDatabase object.
      * Returns true if the spelling list is compatible.
-     * TODO
      * @param database
      * @param customSpellingList
      * @return
@@ -116,10 +116,15 @@ public class DatabaseIO {
             BufferedReader br = new BufferedReader(fr);
             String line;
             String levelKey = "";
+            int levelCounter = 0;
             while((line = br.readLine())!=null){
                 if(line.charAt(0) == '%' ){//get level key
-                    //TODO: if not "Level ??" throw error???
+                    levelCounter++;
+                    if(levelCounter > 11){
+                        return false;
+                    }
                     levelKey = line.substring(1);
+                    database.addNewLevel(levelCounter,levelKey);
                 }else{
                     database.addNewWord(levelKey, line.trim());
                 }

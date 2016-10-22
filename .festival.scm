@@ -1,3 +1,3 @@
 (voice_kal_diphone)
 (Parameter.set 'Duration_Stretch 1.00)
-(SayText "Please spell: was")
+(SayText "Correct.")

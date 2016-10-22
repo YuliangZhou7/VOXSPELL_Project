@@ -9,12 +9,14 @@ import java.util.*;
 /**
  * SpellingDatabase is a serializable object and saves a HashMap of all the spelling words from each
  * level. With the level as the Key. It also stores the accuracy for each level.
- * TODO: make compatible with different spelling lists
+ *
  * Created by Yuliang Zhou on 12/09/2016.
  */
 public class SpellingDatabase implements Serializable{
 
     private static final long serialVersionUID = 1L;
+
+    private HashMap< Integer , String > _levelKeys;
 
     private HashMap< String, ArrayList<Word> > _spellingWords;
     private HashMap< String, ArrayList<Word> > _failedWords;
@@ -29,6 +31,25 @@ public class SpellingDatabase implements Serializable{
         _failedWords = new HashMap<>();
         _scoreForLevel = new HashMap<>();
         _attemptsForLevel = new HashMap<>();
+        _levelKeys = new HashMap<>();
+    }
+
+    /**
+     * Adds a new level name(second parameter) with the levelCounter as the assciated level.
+     * @param levelCounter
+     * @param actualKey
+     */
+    public void addNewLevel(int levelCounter, String actualKey){
+        _levelKeys.put(levelCounter,actualKey);
+    }
+
+    /**
+     * Given a level e.g. "Level 5", returns the actual key of the level name associated with that level.
+     * @param levelCounter
+     * @return
+     */
+    public String getActualKey(int levelCounter){
+        return _levelKeys.get(levelCounter);
     }
 
     /**
@@ -139,15 +160,24 @@ public class SpellingDatabase implements Serializable{
     }
 
     /**
-     * getNormalQuiz returns 10 random words from a given level as a String array.
+     * getNormalQuiz returns 10 random words from a given level as a String array. If there are less
+     * than 10 words then it will return however many there are.
      * @param levelKey
      * @return String[] words from level x
      */
     public String[] getNormalQuiz(String levelKey){
         ArrayList<Word> levelWords = _spellingWords.get(levelKey);
         Collections.shuffle(levelWords);
-        String[] testList = new String[10];
-        for(int i=0;i<10;i++){
+        String[] testList;
+        int maxSize;
+        if(levelWords.size()>9) {
+            maxSize = 10;
+            testList = new String[maxSize];
+        }else{
+            maxSize = levelWords.size();
+            testList = new String[maxSize];
+        }
+        for(int i=0;i<maxSize;i++){
             testList[i] = levelWords.get(i).toString();
         }
         return testList;
@@ -246,7 +276,7 @@ public class SpellingDatabase implements Serializable{
 
     /**
      * Returns an ArrayList of strings of the levels in the spelling database in order from lowest level to highest.
-     * From "Level 1" to "Level 11"
+     * From "Level 1" to "Level 11" TODO:LevelComparator
      * @return
      */
     public ArrayList<String> getAllLevels() {
@@ -257,7 +287,35 @@ public class SpellingDatabase implements Serializable{
     }
 
     /**
+     * Returns a set of all the level numbers in the spelling list.
+     * @return
+     */
+    public Set<Integer> getLevelNumbers() {
+        return _levelKeys.keySet();
+    }
+
+    /**
+     * Returns true if level number is the last level. False otherwise.
+     * @param level
+     * @return
+     */
+    public boolean isLastLevel(int level) {
+        ArrayList<Integer> levels = new ArrayList<>();
+        for(Integer i : _levelKeys.keySet()){
+            levels.add(i);
+        }
+        Collections.sort(levels);
+        int lastLevel = levels.get(levels.size()-1);
+        if(level<lastLevel){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
      * Sorts the spelling levels from Level 1 to Level 11.
+     * TODO: what if keys are not "Level ?"
      */
     private class LevelComparator implements Comparator<String> {
         @Override
