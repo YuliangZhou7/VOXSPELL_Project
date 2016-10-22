@@ -21,6 +21,7 @@ import javafx.animation.FadeTransition;
 import javafx.beans.property.DoubleProperty;
 
 
+import javafx.scene.media.AudioClip;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
@@ -42,21 +43,25 @@ import java.util.HashMap;
  * Created by Samule Li and Yuliang Zhou on 5/09/16.
  */
 public class MasterController extends StackPane {
-
+    //screens
     private HashMap< Main.Screen, Node> _screens;
     private HashMap< Main.Screen, ControlledScreen> _controllers;
 
+    //file io
     private File _defaultFile;
-
     private DatabaseIO _dataIO;
 
+    //databases
     private DatabaseManager _spellingDatabase;
     private ArrayList<String> _spellingListKeys;
     private String _currentSpellingList;
 
+    //voice
     private String _voice;
     private String _voiceSpeed;
 
+    //sounds effects
+    final AudioClip _buttonPressSound;
 
     public MasterController(){
         super();
@@ -69,6 +74,7 @@ public class MasterController extends StackPane {
         _currentSpellingList = "Default";
         _voice = "Default";
         _voiceSpeed = "1.00";
+        _buttonPressSound = new AudioClip(MasterController.class.getResource("/resources/audio/Tiny_Button_Push-SoundBible.com-513260752.wav").toString());
     }
 
     /**
@@ -128,7 +134,9 @@ public class MasterController extends StackPane {
         }
     }
 
-
+    public void buttonClick(){
+        _buttonPressSound.play();
+    }
 
     public String get_currentSpellingList() {
         return _currentSpellingList;

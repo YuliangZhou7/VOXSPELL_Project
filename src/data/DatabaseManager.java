@@ -12,6 +12,8 @@ import java.util.HashMap;
  */
 public class DatabaseManager implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+
     private HashMap<String , SpellingDatabase > _spellingLists;
 
     /**
