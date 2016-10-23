@@ -1,7 +1,6 @@
 package gui;
 
 import data.FestivalFileWriter;
-import data.SpellingDatabase;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -10,29 +9,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * This is the controller for that settingsScreen.fxml. In this Screen it is possible to change the type of voice
  * used by festival. It also has the option of clearing stats.
- * TODO: add background volume slider
  * Author: Yuliang Zhou 7/09/2016
  */
 public class SettingsScreenController implements ControlledScreen{
 
-    private MasterController _myParentScreensController;
+    private MasterController _myParentController;
     private ObservableList<String> _voiceTypeList;
     private ObservableList<String> _voiceSpeedList;
 
@@ -55,13 +47,19 @@ public class SettingsScreenController implements ControlledScreen{
      */
     @Override
     public void setScreenParent(MasterController screenParent) {
-        _myParentScreensController = screenParent;
+        _myParentController = screenParent;
     }
 
     @Override
     public void displayScreen() {
-        _voiceSelect.setValue(_myParentScreensController.get_voice());
-        _voiceSpeed.setValue(_myParentScreensController.get_voiceSpeed());
+        _voiceSelect.setValue(_myParentController.get_voice());
+        if(_voiceSpeed.getValue().equals("Fast")) {
+            _voiceSpeed.setValue("0.75");
+        }else if(_voiceSpeed.getValue().equals("Slow")) {
+            _voiceSpeed.setValue("1.5");
+        }else {//normal speed
+            _voiceSpeed.setValue("1.00");
+        }
     }
 
     @Override
@@ -70,11 +68,11 @@ public class SettingsScreenController implements ControlledScreen{
         //setup voice type
         _voiceTypeList = FXCollections.observableArrayList("Default","New Zealand");
         _voiceSelect.setItems(_voiceTypeList);
-        _voiceSelect.setValue(_myParentScreensController.get_voice());
+        _voiceSelect.setValue(_myParentController.get_voice());
         //setup voice speed
-        _voiceSpeedList = FXCollections.observableArrayList("0.5","1.00","1.50","2.00");//TODO: 0.5 = slower, 2.0 = faster
+        _voiceSpeedList = FXCollections.observableArrayList("Slow","Normal","Fast");
         _voiceSpeed.setItems(_voiceSpeedList);
-        _voiceSpeed.setValue(_myParentScreensController.get_voiceSpeed());
+        _voiceSpeed.setValue(_myParentController.get_voiceSpeed());
         _enableInput = new SimpleBooleanProperty(this,"_enableInput",true);
         //setup spelling list combobox
         updateSpellingListComboBox();
@@ -98,32 +96,44 @@ public class SettingsScreenController implements ControlledScreen{
      * @param actionEvent
      */
     public void fileChooserOpened(ActionEvent actionEvent) {
+        _myParentController.buttonClickSound();
         FileChooser fc = new FileChooser();
         fc.setInitialDirectory(new File("."));
         fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files(.txt)", "*.txt"));
         File selectedFile = fc.showOpenDialog(Main.getStage());
         if (selectedFile != null) {
-            _myParentScreensController.addSpellingFile(selectedFile);
+            _myParentController.addSpellingFile(selectedFile);
             updateSpellingListComboBox();
             _spellingLists.setValue(selectedFile.getName());
         }
     }
 
     /**
+     * Sends a request to delete the currently selected list.
+     * Default list cannot be removed
+     */
+    public void deleteList(){
+        _myParentController.buttonClickSound();
+        _myParentController.requestDeleteSpellingList(_spellingLists.getValue());
+        updateSpellingListComboBox();
+    }
+
+    /**
      * This method is called when user adds or removes a spelling list.
      */
     private void updateSpellingListComboBox() {
-        List<String> list = _myParentScreensController.getSpellingListKeys();
+        List<String> list = _myParentController.getSpellingListKeys();
         ObservableList obList = FXCollections.observableList(list);
         _spellingLists.setItems(obList);
-        _spellingLists.setValue(_myParentScreensController.get_currentSpellingList());
+        _spellingLists.setValue(_myParentController.get_currentSpellingList());
     }
 
     /**
      * Sends a request to clear all the statistics of all spelling lists
      */
     public void clearStatsButtonPressed(){
-        _myParentScreensController.requestClearStats();
+        _myParentController.buttonClickSound();
+        _myParentController.requestClearStats();
     }
 
     /**
@@ -132,16 +142,23 @@ public class SettingsScreenController implements ControlledScreen{
      * @throws InterruptedException
      */
     public void backButtonPressed() throws IOException, InterruptedException {
+        _myParentController.buttonClickSound();
+        String newVoiceSpeed;
+        if(_voiceSpeed.getValue().equals("Fast")) {
+            newVoiceSpeed = "0.75";
+        }else if(_voiceSpeed.getValue().equals("Slow")) {
+            newVoiceSpeed = "1.5";
+        }else {//normal speed
+            newVoiceSpeed = "1.00";
+        }
+        FestivalFileWriter.getInstance().changeSpeed(newVoiceSpeed);
         if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
-            FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue());
         }else if((_voiceSelect.getValue()).equals("New Zealand")){
             FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
-            FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue());
         }
-        _myParentScreensController.set_voice(_voiceSelect.getValue());
-        _myParentScreensController.set_voiceSpeed(_voiceSpeed.getValue());
-        _myParentScreensController.setScreen(Main.Screen.TITLE);
+        _myParentController.set_voice(_voiceSelect.getValue());
+        _myParentController.setScreen(Main.Screen.TITLE);
     }
 
     /**
@@ -157,20 +174,21 @@ public class SettingsScreenController implements ControlledScreen{
             FestivalFileWriter.getInstance().changeVoice("(voice_akl_nz_jdt_diphone)");
             FestivalFileWriter.getInstance().changeSpeechText("Hello. I am the New Zealand voice.");
         }
-        FestivalFileWriter.getInstance().changeSpeed(_voiceSpeed.getValue().toString());
-        _myParentScreensController.set_voice(_voiceSelect.getValue());
-        _myParentScreensController.set_voiceSpeed(_voiceSpeed.getValue());
+        _myParentController.set_voice(_voiceSelect.getValue());
+        String newVoiceSpeed;
+        if(_voiceSpeed.getValue().equals("Fast")) {
+            newVoiceSpeed = "0.75";
+            _myParentController.set_voiceSpeed("0.75");
+        }else if(_voiceSpeed.getValue().equals("Slow")) {
+            newVoiceSpeed = "1.5";
+            _myParentController.set_voiceSpeed("1.5");
+        }else {//normal speed
+            newVoiceSpeed = "1.00";
+            _myParentController.set_voiceSpeed("1.00");
+        }
+        FestivalFileWriter.getInstance().changeSpeed(newVoiceSpeed);
         //read out the test phrase
         _festival.restart();
-    }
-
-    /**
-     * Sends a request to delete the currently selected list.
-     * Default list cannot be removed
-     */
-    public void deleteList(){
-        _myParentScreensController.requestDeleteSpellingList(_spellingLists.getValue());
-        updateSpellingListComboBox();
     }
 
 

@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class StatsScreenController implements ControlledScreen{
 
-    private MasterController _myParentScreensController;
+    private MasterController _myParentController;
 
     private SpellingDatabase _database;
 
@@ -48,13 +48,9 @@ public class StatsScreenController implements ControlledScreen{
     @FXML
     private PieChart _piechart;
 
-    public void backButtonPressed(){
-        _myParentScreensController.setScreen(Main.Screen.TITLE);
-    }
-
     @Override
     public void setScreenParent(MasterController screenParent) {
-        _myParentScreensController = screenParent;
+        _myParentController = screenParent;
     }
 
     @Override
@@ -64,7 +60,7 @@ public class StatsScreenController implements ControlledScreen{
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if(newValue!=null) {
-                    _myParentScreensController.set_currentSpellingList(newValue);
+                    _myParentController.set_currentSpellingList(newValue);
                     updateScreen();
                 }
             }
@@ -91,19 +87,24 @@ public class StatsScreenController implements ControlledScreen{
     @Override
     public void displayScreen() {
         //update spelling list model
-        _database = _myParentScreensController.getCurrentSpellilngModel();
+        _database = _myParentController.getCurrentSpellilngModel();
 
         //get all spelling lists
-        List<String> list = _myParentScreensController.getSpellingListKeys();
+        List<String> list = _myParentController.getSpellingListKeys();
         ObservableList obList = FXCollections.observableList(list);
         _spellingLists.setItems(obList);
-        _spellingLists.setValue(_myParentScreensController.get_currentSpellingList());
+        _spellingLists.setValue(_myParentController.get_currentSpellingList());
 
         updateScreen();
     }
 
+    public void backButtonPressed(){
+        _myParentController.buttonClickSound();
+        _myParentController.setScreen(Main.Screen.TITLE);
+    }
+
     public void updateScreen(){
-        _database = _myParentScreensController.getCurrentSpellilngModel();
+        _database = _myParentController.getCurrentSpellilngModel();
 
         //update level list
         _levelSelection.getItems().clear();
@@ -147,11 +148,11 @@ public class StatsScreenController implements ControlledScreen{
             _piechart.setVisible(true);
             _piechart.setData(pieChartData);
             _piechart.setLegendVisible(false);
-            applyCustomColorSequence( pieChartData,"green", "orange", "red" );
+            applyColors( pieChartData,"green", "orange", "red" );
         }
     }
 
-    private void applyCustomColorSequence(ObservableList<PieChart.Data> pieChartData,String... pieColors) {
+    private void applyColors(ObservableList<PieChart.Data> pieChartData,String... pieColors) {
         int i = 0;
         for (PieChart.Data data : pieChartData) {
             Node n = data.getNode();

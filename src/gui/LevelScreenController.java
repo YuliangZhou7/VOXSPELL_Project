@@ -147,6 +147,7 @@ public class LevelScreenController implements ControlledScreen {
     }
 
     public void levelButtonPressed(ActionEvent event){
+        _myParentController.buttonClickSound();
         b1.setDisable(false);
         b2.setDisable(false);
         b3.setDisable(false);
@@ -165,6 +166,8 @@ public class LevelScreenController implements ControlledScreen {
     }
 
     public void enterNewQuiz(ActionEvent event){
+        _myParentController.buttonClickSound();
+
         _startQuiz.setDisable(true);
 
         _myParentController.set_currentSpellingList(_spellingLists.getValue());
@@ -200,6 +203,7 @@ public class LevelScreenController implements ControlledScreen {
      * This method is called when the back button is pressed and Switches the scene to the TITLE screen.
      */
     public void backButtonPressed(){
+        _myParentController.buttonClickSound();
         _myParentController.setScreen(Main.Screen.TITLE);
     }
 

@@ -19,10 +19,17 @@
             <HBox spacing="10.0" BorderPane.alignment="CENTER">
                <children>
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" onAction="#backButtonPressed" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Back">
+                  <Button mnemonicParsing="false" onAction="#backButtonPressed" prefWidth="100.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Back">
                      <font>
                         <Font size="16.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/images/Back-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
                <padding>
@@ -33,7 +40,7 @@
          <top>
             <Label text="Level Select" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="36.0" />
+                  <Font name="System Bold" size="36.0" />
                </font>
                <padding>
                   <Insets top="10.0" />

@@ -275,19 +275,6 @@ public class SpellingDatabase implements Serializable{
     }
 
     /**
-     * Returns an ArrayList of strings of the levels in the spelling database in order from lowest level to highest.
-     * From "Level 1" to "Level 11"
-     * @return
-     */
-    public ArrayList<String> getAllLevels() {
-        ArrayList<String> levels = new ArrayList<>();
-        levels.addAll(_spellingWords.keySet());
-        //Collections.sort(levels, new LevelComparator());
-        Collections.sort(levels);
-        return levels;
-    }
-
-    /**
      * Returns a set of all the level numbers in the spelling list.
      * @return
      */
@@ -297,7 +284,6 @@ public class SpellingDatabase implements Serializable{
 
     /**
      * Returns true if level number is the last level. False otherwise.
-     * TODO: not working?
      * @param level
      * @return
      */
@@ -308,27 +294,44 @@ public class SpellingDatabase implements Serializable{
         }
         Collections.sort(levels);
         int lastLevel = levels.get(levels.size()-1);
-        if(level<lastLevel){
-            return true;
-        }else{
+        if( level < lastLevel ){
             return false;
+        }else{
+            return true;
         }
     }
 
     /**
+     * Returns an ArrayList of strings of the levels in the spelling database in order from lowest level to highest.
+     * From "Level 1" to "Level 11"
+     * @return
+     */
+    public ArrayList<String> getAllLevels() {
+        ArrayList<String> levels = new ArrayList<>();
+        levels.addAll(_spellingWords.keySet()); //actual keys
+        Collections.sort(levels, new LevelComparator());
+        return levels;
+    }
+
+    /**
      * Sorts the spelling levels from Level 1 to Level 11. Compare actual key names and corresponding values.
-     * TODO: what if keys are not "Level ?"
      */
     private class LevelComparator implements Comparator<String> {
         @Override
         public int compare(String o1, String o2) {
-            String[] level1 = o1.split(" ");
-            String[] level2 = o2.split(" ");
-            int n1 = Integer.parseInt(level1[1]);
-            int n2 = Integer.parseInt(level2[1]);
-            if(n1<n2){
+            int o1Int = 0;
+            int o2Int = 0;
+            for(Integer i : _levelKeys.keySet()) {//loop through all level numbers
+                if(_levelKeys.get(i).equals(o1)){
+                    o1Int = i;
+                }
+                if(_levelKeys.get(i).equals(o2)){
+                    o2Int = i;
+                }
+            }
+            if(o1Int<o2Int){
                 return -1;
-            }else if(n1>n2){
+            }else if(o1Int>o2Int){
                 return 1;
             }else{
                 return 0;

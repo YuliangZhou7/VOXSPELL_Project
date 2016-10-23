@@ -65,7 +65,6 @@ public class MasterController extends StackPane {
     private AudioClip _correctSound;
     private AudioClip _cheeringSound;
     private AudioClip _incorrectSound;
-    //TODO: background music?
 
     public MasterController(){
         super();
@@ -77,7 +76,7 @@ public class MasterController extends StackPane {
         _spellingListKeys = getSpellingListKeys();
         _currentSpellingList = "Default";
         _voice = "Default";
-        _voiceSpeed = "1.00";
+        _voiceSpeed = "Normal";
         _buttonPressSound = new AudioClip(MasterController.class.getResource("/resources/audio/Tiny_Button_Push-SoundBible.com-513260752.wav").toString());
         _cheeringSound = new AudioClip(MasterController.class.getResource("/resources/audio/yay.mp3").toString());
         _correctSound = new AudioClip(MasterController.class.getResource("/resources/audio/success.wav").toString());
@@ -129,7 +128,7 @@ public class MasterController extends StackPane {
 
     //===========================================SOUNDS EFFECTS=======================================================//
 
-    public void buttonClick(){
+    public void buttonClickSound(){
         _buttonPressSound.play();
     }
 
@@ -228,8 +227,8 @@ public class MasterController extends StackPane {
      * @return
      * @throws Exception
      */
-    public boolean loadScreen(Main.Screen nameScreen , String resource) throws IOException {
-        //try {
+    public boolean loadScreen(Main.Screen nameScreen , String resource) {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(resource));
             Parent root = loader.load();
             ControlledScreen myScreenController = loader.getController();
@@ -240,12 +239,12 @@ public class MasterController extends StackPane {
             _screens.put(nameScreen, root);
             System.out.println ("Screen successfully loaded");
             return true;
-        /*}
+        }
         catch (Exception e){
             System.out.println("Error loading screen...");
             System.out.println(e.getMessage());
             return false;
-        }*/
+        }
 
     }
 

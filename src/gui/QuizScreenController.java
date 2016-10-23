@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.math.RoundingMode;
@@ -49,6 +50,8 @@ public class QuizScreenController implements ControlledScreen{
     private Button _submit;
     @FXML
     private Button _repeat;
+    @FXML
+    private Label _feedbackLabel;
 
     /**
      * This method sets the the MasterController as the parent controller for the quiz controller
@@ -106,6 +109,7 @@ public class QuizScreenController implements ControlledScreen{
      * @param event
      */
     public void abortQuizButtonPressed(ActionEvent event){
+        _myParentController.buttonClickSound();
         boolean confirm = DialogBox.displayConfirmDialogBox("Quit current quiz","Are you sure you wish to " +
                 "quit current quiz? Unsaved progress will be lost.");
         if(confirm) {
@@ -134,7 +138,13 @@ public class QuizScreenController implements ControlledScreen{
         }
     }
 
+    /**
+     * TODO:pop up settings for voice
+     */
+    public void openSettingsPopUp(){
+        _myParentController.buttonClickSound();
 
+    }
 
 
     //==========================================SPELLING_LOGIC=====================================================//
@@ -197,6 +207,8 @@ public class QuizScreenController implements ControlledScreen{
         _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
         _accuracy.setText("Accuracy: "+0.0+"%");
         _tooltip.setText("");
+        _feedbackLabel.setText("Begin");
+        _feedbackLabel.setTextFill(Color.web("#000000"));
         return true;
     }
 
@@ -219,15 +231,21 @@ public class QuizScreenController implements ControlledScreen{
                 _position++;
                 if( _position == _wordList.length ){
                     completed = true;
+                    _feedbackLabel.setText("Correct");
+                    _feedbackLabel.setTextFill(Color.web("#00e600"));
                     read("Correct.");
                 }else {//Move onto next word
                     _myParentController.playCorrectSound();
+                    _feedbackLabel.setText("Correct");
+                    _feedbackLabel.setTextFill(Color.web("#00e600"));
                     read("Correct. Please spell: " + _wordList[_position]);
                     _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
                 }
 
             } else { // GO TO SECOND ATTEMPT
                 _myParentController.playIncorrectSounds();
+                _feedbackLabel.setText("Try again");
+                _feedbackLabel.setTextFill(Color.web("#ff9900"));
                 read("Incorrect. Please try again: " + _wordList[_position]);
                 _progressLabel.setText("Incorrect. Please spell word "+(_position+1)+" of "+_wordList.length);
                 _status = Status.SECONDATTEMPT;
@@ -243,9 +261,13 @@ public class QuizScreenController implements ControlledScreen{
                 _position++;
                 if( _position == _wordList.length ){
                     completed = true;
+                    _feedbackLabel.setText("Correct");
+                    _feedbackLabel.setTextFill(Color.web("#00e600"));
                     read("Correct.");
                 }else {//Correct on second attempt. Move onto next word
                     _myParentController.playCorrectSound();
+                    _feedbackLabel.setText("Correct");
+                    _feedbackLabel.setTextFill(Color.web("#00e600"));
                     read("Correct. Please spell: " + _wordList[_position]);
                     _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
                 }
@@ -259,9 +281,13 @@ public class QuizScreenController implements ControlledScreen{
                 _position++;
                 if( _position == _wordList.length ){
                     completed = true;
+                    _feedbackLabel.setText("Incorrect");
+                    _feedbackLabel.setTextFill(Color.web("#e60000"));
                     read("Incorrect");
                 }else {
                     _myParentController.playIncorrectSounds();
+                    _feedbackLabel.setText("Incorrect");
+                    _feedbackLabel.setTextFill(Color.web("#e60000"));
                     read("Incorrect. Please spell: " + _wordList[_position]);
                     _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
                 }

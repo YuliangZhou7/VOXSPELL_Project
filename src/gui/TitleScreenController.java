@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
  */
 public class TitleScreenController implements ControlledScreen{
 
-    private MasterController _myParentScreensController;
+    private MasterController _myParentController;
 
     @FXML
     private Button _startButton;
@@ -22,7 +22,7 @@ public class TitleScreenController implements ControlledScreen{
 
     @Override
     public void setScreenParent(MasterController screenParent) {
-        _myParentScreensController = screenParent;
+        _myParentController = screenParent;
     }
 
     @Override
@@ -38,7 +38,8 @@ public class TitleScreenController implements ControlledScreen{
      * Uses a fade in and out transition.
      */
     public void normalQuizPressed(){
-        _myParentScreensController.setScreen(Main.Screen.LEVELSELECT);
+        _myParentController.buttonClickSound();
+        _myParentController.setScreen(Main.Screen.LEVELSELECT);
     }
 
     /**
@@ -47,7 +48,8 @@ public class TitleScreenController implements ControlledScreen{
      * Uses a fade in and out transition
      */
     public void displayStatsButtonPressed(){
-        _myParentScreensController.setScreen(Main.Screen.STATS);
+        _myParentController.buttonClickSound();
+        _myParentController.setScreen(Main.Screen.STATS);
     }
 
     /**
@@ -55,14 +57,19 @@ public class TitleScreenController implements ControlledScreen{
      * Uses a fade in and out transition.
      */
     public void settingsButtonPressed(){
-        _myParentScreensController.setScreen(Main.Screen.SETTINGS);
+        _myParentController.buttonClickSound();
+        _myParentController.setScreen(Main.Screen.SETTINGS);
     }
 
     public void helpButtonPressed(){
+        _myParentController.buttonClickSound();
         //TODO: add help screen
     }
 
     public void quitButtonPressed(){
-        _myParentScreensController.confirmCloseProgram();
+        _myParentController.buttonClickSound();
+        _myParentController.confirmCloseProgram();
     }
+
+
 }

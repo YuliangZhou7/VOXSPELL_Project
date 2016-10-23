@@ -58,8 +58,8 @@ public class PostQuizController implements ControlledScreen{
             _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
             _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
         }
-        if(_correct>8){//TODO: reset once finished
-            _playVideoButton.setDisable(false);
+        if(_correct>8){
+            _playVideoButton.setDisable(true);
         }else{
             _playVideoButton.setDisable(false);
         }
@@ -72,6 +72,7 @@ public class PostQuizController implements ControlledScreen{
 
 
     public void returnToTitleButtonPressed(ActionEvent event){
+        _myParentController.buttonClickSound();
         _myParentController.setScreen(Main.Screen.TITLE);
     }
 
@@ -81,6 +82,7 @@ public class PostQuizController implements ControlledScreen{
      * @throws IOException
      */
     public void playVideoButtonPressed(ActionEvent event)throws IOException{
+        _myParentController.buttonClickSound();
         //sets up the video
         ((VideoPlayerController)_myParentController.getScreenController(Main.Screen.VIDEO)).setCurrentVideo(_levelInt);
         //switches screen to the videoplayer screen and calls displayScreen() which auto plays the video
@@ -91,6 +93,7 @@ public class PostQuizController implements ControlledScreen{
      * This button is only enable if user scored 9 or more and the level is less than level 11.
      */
     public void nextLevelButtonPressed(ActionEvent event){
+        _myParentController.buttonClickSound();
         //change into quiz screen
         _myParentController.setScreen(Main.Screen.QUIZ);
 
@@ -108,6 +111,8 @@ public class PostQuizController implements ControlledScreen{
      * @param event
      */
     public void reviewLevelButtonPressed(ActionEvent event){
+        _myParentController.buttonClickSound();
+
         //get the QuizScreen Controller
         QuizScreenController nextScreen = (QuizScreenController)_myParentController.getScreenController(Main.Screen.QUIZ);
         boolean enabledQuiz = nextScreen.setupTest(_levelInt,true);
