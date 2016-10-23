@@ -61,7 +61,10 @@ public class MasterController extends StackPane {
     private String _voiceSpeed;
 
     //sounds effects
-    final AudioClip _buttonPressSound;
+    private AudioClip _buttonPressSound;
+    private AudioClip _correctSound;
+    private AudioClip _cheeringSound;
+    private AudioClip _incorrectSound;
 
     public MasterController(){
         super();
@@ -75,7 +78,73 @@ public class MasterController extends StackPane {
         _voice = "Default";
         _voiceSpeed = "1.00";
         _buttonPressSound = new AudioClip(MasterController.class.getResource("/resources/audio/Tiny_Button_Push-SoundBible.com-513260752.wav").toString());
+        _cheeringSound = new AudioClip(MasterController.class.getResource("/resources/audio/yay.mp3").toString());
+        _correctSound = new AudioClip(MasterController.class.getResource("/resources/audio/success.wav").toString());
+        _incorrectSound = new AudioClip(MasterController.class.getResource("/resources/audio/incorrect.wav").toString());
     }
+
+
+    /**
+     * Called from Settings screen. Uses the DatabaseIO object to read the file and creates a new SpellingDatabase
+     * object from it. Then adds the new SpellingDatabase object to the DatabaseManager if it's not already contained.
+     * @param file
+     */
+    public void addSpellingFile(File file) {
+        SpellingDatabase newList = new SpellingDatabase();
+        boolean isSuccessful = _dataIO.readNewWordList(newList,file);
+        if(isSuccessful){
+            _spellingDatabase.addNewSpellingList(file.getName(),newList);
+        }else{
+            DialogBox.errorDialogBox("Error","Sorry incorrect format given. Please refer to help and try again.");
+        }
+    }
+
+    /**
+     * Returns true if level number is the last level. False otherwise.
+     * @param level
+     * @return
+     */
+    public boolean isLastLevel(int level) {
+        return getCurrentSpellilngModel().isLastLevel(level);
+    }
+
+    /**
+     *  Checks if user really wants to delete data before deleting.
+     */
+    public void requestClearStats() {
+        boolean clearTrue = DialogBox.displayConfirmDialogBox("Clear User Statistics", "Are you sure you want to clear all user data?");
+        if (clearTrue) {
+            _spellingDatabase.clearAllStats();
+        }
+    }
+
+    /**
+     * Request DatabaseManager object to remove the spelling list given by the name of the list as the key.
+     * @param listToRemove
+     */
+    public void requestDeleteSpellingList(String listToRemove){
+        _spellingDatabase.removeSpellingList(listToRemove);
+    }
+
+    //===========================================SOUNDS EFFECTS=======================================================//
+
+    public void buttonClick(){
+        _buttonPressSound.play();
+    }
+
+    public void playCorrectSound(){
+        _correctSound.play();
+    }
+
+    public void playIncorrectSounds(){
+        _incorrectSound.play();
+    }
+
+    public void playCheeringSound(){
+        _cheeringSound.play();
+    }
+
+    //=========================================GETTERS & SETTERS======================================================//
 
     /**
      * Returns the instance of the controller object given as type ControlledScreen. Must be cast
@@ -103,47 +172,6 @@ public class MasterController extends StackPane {
     public ArrayList<String> getSpellingListKeys(){
         _spellingListKeys = _spellingDatabase.getSpellingKeys();
         return _spellingListKeys;
-    }
-
-    /**
-     * Called from Settings screen. Uses the DatabaseIO object to read the file and creates a new SpellingDatabase
-     * object from it. Then adds the new SpellingDatabase object to the DatabaseManager if it's not already contained.
-     * @param file
-     */
-    public void addSpellingFile(File file) {
-        SpellingDatabase newList = new SpellingDatabase();
-        boolean isSuccessful = _dataIO.readNewWordList(newList,file);
-        if(isSuccessful){
-            _spellingDatabase.addNewSpellingList(file.getName(),newList);
-        }else{
-            DialogBox.errorDialogBox("Error","Sorry incorrect format given. Please refer to help and try again.");
-        }
-    }
-
-    public boolean isLastLevel(int level) {
-        return getCurrentSpellilngModel().isLastLevel(level);
-    }
-
-    /**
-     *  Checks if user really wants to delete data before deleting.
-     */
-    public void requestClearStats() {
-        boolean clearTrue = DialogBox.displayConfirmDialogBox("Clear User Statistics", "Are you sure you want to clear all user data?");
-        if (clearTrue) {
-            _spellingDatabase.clearAllStats();
-        }
-    }
-
-    /**
-     * Request DatabaseManager object to remove the spelling list given by the name of the list as the key.
-     * @param listToRemove
-     */
-    public void requestDeleteSpellingList(String listToRemove){
-        _spellingDatabase.removeSpellingList(listToRemove);
-    }
-
-    public void buttonClick(){
-        _buttonPressSound.play();
     }
 
     public String get_currentSpellingList() {

@@ -13,6 +13,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -39,9 +40,14 @@ public class VideoPlayerController implements ControlledScreen{
     @Override
     public void setup() {
         //locates the file location of play.mp4
-        File file = new File("./resources/play.mp4");
+        //File file = new File("./resources/play.mp4");
         //converts the media path to a URI.
-        _media = new Media(file.toURI().toString());
+        // _media = new Media(file.toURI().toString());
+        try {
+            _media = new Media(VideoPlayerController.class.getResource("/resources/play.mp4").toURI().toString());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         _mediaPlayer = new MediaPlayer(_media);
         _mediaView.setMediaPlayer(_mediaPlayer);
         //sets a volume of the mediaPlayer

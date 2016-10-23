@@ -221,11 +221,13 @@ public class QuizScreenController implements ControlledScreen{
                     completed = true;
                     read("Correct.");
                 }else {//Move onto next word
+                    _myParentController.playCorrectSound();
                     read("Correct. Please spell: " + _wordList[_position]);
                     _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
                 }
 
             } else { // GO TO SECOND ATTEMPT
+                _myParentController.playIncorrectSounds();
                 read("Incorrect. Please try again: " + _wordList[_position]);
                 _progressLabel.setText("Incorrect. Please spell word "+(_position+1)+" of "+_wordList.length);
                 _status = Status.SECONDATTEMPT;
@@ -243,6 +245,7 @@ public class QuizScreenController implements ControlledScreen{
                     completed = true;
                     read("Correct.");
                 }else {//Correct on second attempt. Move onto next word
+                    _myParentController.playCorrectSound();
                     read("Correct. Please spell: " + _wordList[_position]);
                     _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
                 }
@@ -258,6 +261,7 @@ public class QuizScreenController implements ControlledScreen{
                     completed = true;
                     read("Incorrect");
                 }else {
+                    _myParentController.playIncorrectSounds();
                     read("Incorrect. Please spell: " + _wordList[_position]);
                     _progressLabel.setText("Please spell word "+(_position+1)+" of "+_wordList.length);
                 }
@@ -332,7 +336,6 @@ public class QuizScreenController implements ControlledScreen{
         //get the PostQuizScreen Controller object
         PostQuizController nextScreen = ((PostQuizController)_myParentController.getScreenController(Main.Screen.POSTQUIZ));
         nextScreen.set_testResults(_levelInt,accuracy,correctCount,_wordList.length); //_currentLevel-"Level 5" or "small animals"
-        nextScreen.showResults();
 
         //change screen
         _myParentController.setScreen(Main.Screen.POSTQUIZ);

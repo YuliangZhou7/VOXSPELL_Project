@@ -49,6 +49,26 @@ public class PostQuizController implements ControlledScreen{
 
     @Override
     public void displayScreen() {
+        _myParentController.playCheeringSound();
+        if (_total == 0) {
+            _reviewButton.setDisable(true);
+            _userResultsOne.setText("Congratulations.");
+            _userResultsTwo.setText("Keep up the good work :)");
+        }else {
+            _reviewButton.setDisable(false);
+            _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
+            _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
+        }
+        if(_correct>8){
+            _playVideoButton.setDisable(false);
+        }else{
+            _playVideoButton.setDisable(true);
+        }
+        if(_accuracy<90.0 || _correct<9 || _myParentController.isLastLevel(_levelInt) ){
+            _nextLevelButton.setDisable(true);
+        }else{
+            _nextLevelButton.setDisable(false);
+        }
     }
 
 
@@ -98,7 +118,9 @@ public class PostQuizController implements ControlledScreen{
         }
     }
 
-    // sets the fields of the test results of the current level.
+    /**
+     *  sets the fields of the test results of the current level.
+     */
     public void set_testResults(int level, double accuracy, int correct, int total){
         _levelInt = level;
         _correct = correct;
@@ -109,30 +131,4 @@ public class PostQuizController implements ControlledScreen{
         _total = total;
     }
 
-    /**
-     * This method is called by the QuizScreenController after the results have been set and just before the screen
-     * switches
-     */
-    public void showResults() {
-        if (_total == 0) {
-            _reviewButton.setDisable(true);
-            _userResultsOne.setText("Congratulations.");
-            _userResultsTwo.setText("Keep up the good work :)");
-        }else {
-            _reviewButton.setDisable(false);
-            _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
-            _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
-        }
-        if(_correct>8){
-            _playVideoButton.setDisable(false);
-        }else{
-            _playVideoButton.setDisable(true);
-        }
-        if(_accuracy<90.0 || _correct<9 || _myParentController.isLastLevel(_levelInt) ){
-            _nextLevelButton.setDisable(true);
-        }else{
-            _nextLevelButton.setDisable(false);
-        }
-
-    }
 }
