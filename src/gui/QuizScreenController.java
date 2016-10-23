@@ -10,14 +10,20 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Arrays;
@@ -141,9 +147,22 @@ public class QuizScreenController implements ControlledScreen{
     /**
      * TODO:pop up settings for voice
      */
-    public void openSettingsPopUp(){
+    public void openSettingsPopUp() throws IOException {
         _myParentController.buttonClickSound();
+        Stage window = new Stage();
 
+        //Block events to other windows
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Settings");
+        window.setMinWidth(300);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/resources/fxml/popupSettings.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        PopupSettingsController popupController = (PopupSettingsController) fxmlLoader.getController();
+        popupController.setUp(window,_myParentController);
+        window.setScene(new Scene(root, 320, 340));
+        window.setResizable(false);
+        window.show();
     }
 
 

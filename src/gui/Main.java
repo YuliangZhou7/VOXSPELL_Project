@@ -17,13 +17,13 @@ public class Main extends Application {
     //Set enums for each screen that has been loaded.
     public enum Screen{TITLE,QUIZ,LEVELSELECT,POSTQUIZ,SETTINGS,STATS,VIDEO};
 
-    public static final String titleScreenFXML = "titleScreen.fxml";
-    public static final String quizScreenFXML = "quizScreen.fxml";
-    public static final String statsScreenFXML = "statsScreen.fxml";
-    public static final String settingsScreenFXML = "settingsScreen.fxml";
-    public static final String levelScreenFXML = "levelSelectScreen.fxml";
-    public static final String postQuizScreenFXML = "postQuizScreen.fxml";
-    public static final String videoPlayerFXML = "videoPlayer.fxml";
+    public static final String titleScreenFXML = "/resources/fxml/titleScreen.fxml";
+    public static final String quizScreenFXML = "/resources/fxml/quizScreen.fxml";
+    public static final String statsScreenFXML = "/resources/fxml/statsScreen.fxml";
+    public static final String settingsScreenFXML = "/resources/fxml/settingsScreen.fxml";
+    public static final String levelScreenFXML = "/resources/fxml/levelSelectScreen.fxml";
+    public static final String postQuizScreenFXML = "/resources/fxml/postQuizScreen.fxml";
+    public static final String videoPlayerFXML = "/resources/fxml/videoPlayer.fxml";
 
 
     @Override

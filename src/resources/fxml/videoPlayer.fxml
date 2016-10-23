@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="850.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../resources/images/background.png" />
+            <Image url="@../images/background.png" />
          </image>
       </ImageView>
       <BorderPane layoutX="-1.0" layoutY="-2.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0">
@@ -22,7 +22,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/playbutton.png" />
+                              <Image url="@../images/playbutton.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -34,7 +34,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/rewind.png" />
+                              <Image url="@../images/rewind.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -46,7 +46,7 @@
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/fastforward.png" />
+                              <Image url="@../images/fastforward.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -58,7 +58,7 @@
                      <graphic>
                         <ImageView fitHeight="63.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/pause.png" />
+                              <Image url="@../images/pause.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -70,7 +70,7 @@
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/reload.png" />
+                              <Image url="@../images/reload.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -82,7 +82,7 @@
                      <graphic>
                         <ImageView fitHeight="76.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/return.png" />
+                              <Image url="@../images/return.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -94,7 +94,7 @@
                      <graphic>
                         <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../resources/images/sound.png" />
+                              <Image url="@../images/sound.png" />
                            </image>
                         </ImageView>
                      </graphic>
