@@ -338,6 +338,7 @@ public class QuizScreenController implements ControlledScreen{
         nextScreen.set_testResults(_levelInt,accuracy,correctCount,_wordList.length); //_currentLevel-"Level 5" or "small animals"
 
         //change screen
+        _myParentController.playCheeringSound();
         _myParentController.setScreen(Main.Screen.POSTQUIZ);
         _textfield.setText("");
     }

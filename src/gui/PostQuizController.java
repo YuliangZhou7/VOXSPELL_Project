@@ -49,7 +49,6 @@ public class PostQuizController implements ControlledScreen{
 
     @Override
     public void displayScreen() {
-        _myParentController.playCheeringSound();
         if (_total == 0) {
             _reviewButton.setDisable(true);
             _userResultsOne.setText("Congratulations.");
@@ -59,12 +58,12 @@ public class PostQuizController implements ControlledScreen{
             _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
             _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
         }
-        if(_correct>8){
+        if(_correct>8){//TODO: reset once finished
             _playVideoButton.setDisable(false);
         }else{
-            _playVideoButton.setDisable(true);
+            _playVideoButton.setDisable(false);
         }
-        if(_accuracy<90.0 || _correct<9 || _myParentController.isLastLevel(_levelInt) ){
+        if( _correct<9 || _myParentController.isLastLevel(_levelInt) ){
             _nextLevelButton.setDisable(true);
         }else{
             _nextLevelButton.setDisable(false);
@@ -77,11 +76,14 @@ public class PostQuizController implements ControlledScreen{
     }
 
     /**
-     * Opened the browser to play video
+     * Switches screens to play the video
      * @param event
      * @throws IOException
      */
     public void playVideoButtonPressed(ActionEvent event)throws IOException{
+        //sets up the video
+        ((VideoPlayerController)_myParentController.getScreenController(Main.Screen.VIDEO)).setCurrentVideo(_levelInt);
+        //switches screen to the videoplayer screen and calls displayScreen() which auto plays the video
         _myParentController.setScreen(Main.Screen.VIDEO);
     }
 

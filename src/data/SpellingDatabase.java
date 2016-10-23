@@ -276,7 +276,7 @@ public class SpellingDatabase implements Serializable{
 
     /**
      * Returns an ArrayList of strings of the levels in the spelling database in order from lowest level to highest.
-     * From "Level 1" to "Level 11" TODO:LevelComparator
+     * From "Level 1" to "Level 11"
      * @return
      */
     public ArrayList<String> getAllLevels() {
@@ -297,6 +297,7 @@ public class SpellingDatabase implements Serializable{
 
     /**
      * Returns true if level number is the last level. False otherwise.
+     * TODO: not working?
      * @param level
      * @return
      */
@@ -315,7 +316,7 @@ public class SpellingDatabase implements Serializable{
     }
 
     /**
-     * Sorts the spelling levels from Level 1 to Level 11.
+     * Sorts the spelling levels from Level 1 to Level 11. Compare actual key names and corresponding values.
      * TODO: what if keys are not "Level ?"
      */
     private class LevelComparator implements Comparator<String> {

@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 /**
  * This is the controller for that settingsScreen.fxml. In this Screen it is possible to change the type of voice
  * used by festival. It also has the option of clearing stats.
+ * TODO: add background volume slider
  * Author: Yuliang Zhou 7/09/2016
  */
 public class SettingsScreenController implements ControlledScreen{
@@ -108,7 +109,9 @@ public class SettingsScreenController implements ControlledScreen{
         }
     }
 
-
+    /**
+     * This method is called when user adds or removes a spelling list.
+     */
     private void updateSpellingListComboBox() {
         List<String> list = _myParentScreensController.getSpellingListKeys();
         ObservableList obList = FXCollections.observableList(list);
@@ -116,10 +119,18 @@ public class SettingsScreenController implements ControlledScreen{
         _spellingLists.setValue(_myParentScreensController.get_currentSpellingList());
     }
 
+    /**
+     * Sends a request to clear all the statistics of all spelling lists
+     */
     public void clearStatsButtonPressed(){
         _myParentScreensController.requestClearStats();
     }
 
+    /**
+     * Returns to title screen
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void backButtonPressed() throws IOException, InterruptedException {
         if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
@@ -133,6 +144,11 @@ public class SettingsScreenController implements ControlledScreen{
         _myParentScreensController.setScreen(Main.Screen.TITLE);
     }
 
+    /**
+     * Reads. "Hello. I am the the <voice_type> voice."
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void testFestival() throws IOException, InterruptedException {
         if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
@@ -148,10 +164,15 @@ public class SettingsScreenController implements ControlledScreen{
         _festival.restart();
     }
 
+    /**
+     * Sends a request to delete the currently selected list.
+     * Default list cannot be removed
+     */
     public void deleteList(){
         _myParentScreensController.requestDeleteSpellingList(_spellingLists.getValue());
         updateSpellingListComboBox();
     }
+
 
 
     public static boolean is_enableInput() {

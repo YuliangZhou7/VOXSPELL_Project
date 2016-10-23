@@ -24,4 +24,6 @@ public interface ControlledScreen {
      * This method is called immediately after the new screen is set. Does pre-display set up.
      */
     public void displayScreen();
+
+
 }

@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO: javadoc
+ * The settings screen contains a piechart and table view of the user's statistics. Clicking on
+ * an item in the spelling list choicebox changes the level choicebox to the levels from that list.
+ * Clicking an item from the level choicebox updates the table view and refreshes the piechart.
  * Author: Yuliang Zhou 7/09/2016
  */
 public class StatsScreenController implements ControlledScreen{

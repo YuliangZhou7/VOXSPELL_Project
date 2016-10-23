@@ -41,10 +41,6 @@ public class TitleScreenController implements ControlledScreen{
         _myParentScreensController.setScreen(Main.Screen.LEVELSELECT);
     }
 
-    public void customQuizButtonPressed(){
-        //_myParentScreensController.setScreen(Main.Screen.CUSTOMLEVEL);
-    }
-
     /**
      * Requests main screen controller to switch to statistics scene which
      * contains a Table view of the stats of words at each level.
@@ -60,6 +56,10 @@ public class TitleScreenController implements ControlledScreen{
      */
     public void settingsButtonPressed(){
         _myParentScreensController.setScreen(Main.Screen.SETTINGS);
+    }
+
+    public void helpButtonPressed(){
+        //TODO: add help screen
     }
 
     public void quitButtonPressed(){
