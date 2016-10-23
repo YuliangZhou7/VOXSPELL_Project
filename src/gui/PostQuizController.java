@@ -59,9 +59,9 @@ public class PostQuizController implements ControlledScreen{
             _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
         }
         if(_correct>8){
-            _playVideoButton.setDisable(true);
-        }else{
             _playVideoButton.setDisable(false);
+        }else{
+            _playVideoButton.setDisable(true);
         }
         if( _correct<9 || _myParentController.isLastLevel(_levelInt) ){
             _nextLevelButton.setDisable(true);

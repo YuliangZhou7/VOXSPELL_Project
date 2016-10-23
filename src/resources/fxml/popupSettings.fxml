@@ -29,6 +29,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <tooltip>
+                  <Tooltip text="Save settings and return to quiz" />
+               </tooltip>
             </Button>
          </children>
          <padding>

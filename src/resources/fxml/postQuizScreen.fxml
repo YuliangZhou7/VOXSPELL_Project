@@ -30,6 +30,9 @@
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Video will be unlocked if you score 9 or more" />
+                           </tooltip>
                         </Button>
                      </children>
                      <VBox.margin>
@@ -42,16 +45,25 @@
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Starts quiz on the next level" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="_reviewButton" mnemonicParsing="false" onAction="#reviewLevelButtonPressed" prefHeight="100.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: c7f392;" text="Review Level">
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Go over the incorrect words" />
+                           </tooltip>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#returnToTitleButtonPressed" prefHeight="100.0" prefWidth="150.0" style="-fx-background-radius: 50; -fx-background-color: c7f392;" text="Main Menu">
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Return to title screen" />
+                           </tooltip>
                         </Button>
                      </children>
                      <BorderPane.margin>

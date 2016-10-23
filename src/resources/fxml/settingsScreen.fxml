@@ -36,6 +36,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Return to Main Menu" />
+                     </tooltip>
                   </Button>
                </children>
                <padding>
@@ -87,6 +90,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Play the current voice and speed" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
@@ -118,6 +124,9 @@
                                              </image>
                                           </ImageView>
                                        </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Add a .txt file" />
+                                       </tooltip>
                                     </Button>
                                     <Button mnemonicParsing="false" onAction="#deleteList" prefWidth="120.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Delete ">
                                        <font>
@@ -130,6 +139,9 @@
                                              </image>
                                           </ImageView>
                                        </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Delete selected spelling list" />
+                                       </tooltip>
                                     </Button>
                                  </children>
                                  <VBox.margin>
@@ -152,6 +164,9 @@
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip text="Clear all progress" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
