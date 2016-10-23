@@ -148,6 +148,12 @@ public class SettingsScreenController implements ControlledScreen{
         _festival.restart();
     }
 
+    public void deleteList(){
+        _myParentScreensController.requestDeleteSpellingList(_spellingLists.getValue());
+        updateSpellingListComboBox();
+    }
+
+
     public static boolean is_enableInput() {
         return _enableInput.get();
     }

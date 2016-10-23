@@ -50,7 +50,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="_spellingLists" prefWidth="150.0" />
+                        <ChoiceBox fx:id="_spellingLists" prefHeight="30.0" prefWidth="200.0" />
                      </children>
                      <VBox.margin>
                         <Insets top="120.0" />
@@ -123,14 +123,14 @@
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" spacing="20.0">
                      <children>
                         <Label text="Quiz Type:">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="_quizType" prefWidth="150.0" />
+                        <ChoiceBox fx:id="_quizType" prefHeight="30.0" prefWidth="200.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">

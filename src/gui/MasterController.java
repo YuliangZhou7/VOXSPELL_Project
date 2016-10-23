@@ -134,6 +134,14 @@ public class MasterController extends StackPane {
         }
     }
 
+    /**
+     * Request DatabaseManager object to remove the spelling list given by the name of the list as the key.
+     * @param listToRemove
+     */
+    public void requestDeleteSpellingList(String listToRemove){
+        _spellingDatabase.removeSpellingList(listToRemove);
+    }
+
     public void buttonClick(){
         _buttonPressSound.play();
     }

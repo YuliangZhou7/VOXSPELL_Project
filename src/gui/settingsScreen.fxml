@@ -43,68 +43,84 @@
                      <children>
                         <Label text="Voice" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
-                        <ChoiceBox fx:id="_voiceSelect" prefWidth="150.0" style="-fx-background-color: ffffff;" />
+                        <ChoiceBox fx:id="_voiceSelect" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: ffffff;" />
                      </children>
                   </HBox>
                   <HBox prefWidth="200.0">
                      <children>
                         <Label text="Voice Speed" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <ChoiceBox fx:id="_voiceSpeed" prefWidth="150.0" style="-fx-background-color: ffffff;" />
+                        <ChoiceBox fx:id="_voiceSpeed" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: ffffff;" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="73.0" prefWidth="610.0">
+                  <HBox prefHeight="73.0">
                      <children>
                         <Label prefHeight="20.0" prefWidth="115.0" text="Test Voice" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
-                        <Button fx:id="_testButton" mnemonicParsing="false" onAction="#testFestival" prefHeight="28.0" prefWidth="70.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Test">
+                        <Button fx:id="_testButton" mnemonicParsing="false" onAction="#testFestival" prefWidth="100.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Test">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox prefHeight="73.0" prefWidth="610.0">
+                  <HBox prefHeight="90.0" prefWidth="610.0">
                      <children>
                         <Label prefHeight="25.0" prefWidth="214.0" text="Spelling Lists" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Region HBox.hgrow="ALWAYS" />
-                        <ChoiceBox fx:id="_spellingLists" prefWidth="150.0" style="-fx-background-color: ffffff;">
-                           <HBox.margin>
-                              <Insets right="10.0" top="5.0" />
-                           </HBox.margin>
-                        </ChoiceBox>
-                        <Button mnemonicParsing="false" onAction="#fileChooserOpened" prefWidth="120.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Add File">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
+                        <VBox spacing="7.0">
+                           <children>
+                              <ChoiceBox fx:id="_spellingLists" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: ffffff;">
+                                 <HBox.margin>
+                                    <Insets top="5.0" />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                              <HBox spacing="20.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#fileChooserOpened" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Add">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#deleteList" prefWidth="80.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Delete ">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                   <HBox prefWidth="200.0">
                      <children>
                         <Label text="Clear User Stats" textFill="WHITE">
                            <font>
-                              <Font name="System Bold" size="16.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                         <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" onAction="#clearStatsButtonPressed" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Clear">
+                        <Button mnemonicParsing="false" onAction="#clearStatsButtonPressed" prefWidth="100.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Clear">
                            <font>
                               <Font size="16.0" />
                            </font>

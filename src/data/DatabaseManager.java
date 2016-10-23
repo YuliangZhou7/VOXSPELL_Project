@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * TODO: option to delete spelling lists (except Default list)
+ * Serializable object which contains a HashMap of all the SpellingDatabase objects which hold each spelling list.
+ *
  * Created by Yuliang on 22/10/2016.
  */
 public class DatabaseManager implements Serializable{
@@ -49,16 +50,6 @@ public class DatabaseManager implements Serializable{
     }
 
     /**
-     * Loops through each spelling list and clears the statistics of each list.
-     * No spelling list is deleted - only the scores
-     */
-    public void clearAllStats() {
-        for(String key : _spellingLists.keySet()){
-            _spellingLists.get(key).clearStats();
-        }
-    }
-
-    /**
      * Returns the SpellingDatabase object representing the spelling list specified by the key
      * given as a parameter.
      * @param nameOfList
@@ -90,8 +81,20 @@ public class DatabaseManager implements Serializable{
         defaultList.addNewLevel(levelCounter,levelKey);
     }
 
+
     /**
-     * Removes a SpellingDatabase object from the DatabaseManger. TODO: update comboboxes?
+     * Loops through each spelling list and clears the statistics of each list.
+     * No spelling list is deleted - only the scores
+     */
+    public void clearAllStats() {
+        for(String key : _spellingLists.keySet()){
+            _spellingLists.get(key).clearStats();
+        }
+    }
+
+    /**
+     * Removes a SpellingDatabase object from the DatabaseManger. Will prevent "Default" list from being removed.
+     * Also shows a pop-up to confirm if user wants to delete the spelling list.
      * @param spellingList
      */
     public void removeSpellingList(String spellingList){

@@ -111,6 +111,7 @@ public class DatabaseIO {
      * @return
      */
     public boolean readNewWordList(SpellingDatabase database, File customSpellingList){
+        boolean isSuccessful=false;
         try {
             FileReader fr = new FileReader(customSpellingList);
             BufferedReader br = new BufferedReader(fr);
@@ -119,6 +120,7 @@ public class DatabaseIO {
             int levelCounter = 0;
             while((line = br.readLine())!=null){
                 if(line.charAt(0) == '%' ){//get level key
+                    isSuccessful = true;
                     levelCounter++;
                     if(levelCounter > 11){
                         return false;
@@ -136,8 +138,13 @@ public class DatabaseIO {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
+        }finally{
+            if(isSuccessful) {
+                return true;
+            }else{
+                return false;
+            }
         }
-        return true;
     }
 
 }

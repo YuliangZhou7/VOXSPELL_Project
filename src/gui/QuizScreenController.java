@@ -107,7 +107,7 @@ public class QuizScreenController implements ControlledScreen{
      */
     public void abortQuizButtonPressed(ActionEvent event){
         boolean confirm = DialogBox.displayConfirmDialogBox("Quit current quiz","Are you sure you wish to " +
-                "quit current quiz. Unsaved progress will be lost");
+                "quit current quiz? Unsaved progress will be lost.");
         if(confirm) {
             _myParentController.setScreen(Main.Screen.TITLE);
         }

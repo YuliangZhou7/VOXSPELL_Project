@@ -259,11 +259,11 @@ public class SpellingDatabase implements Serializable{
     }
 
     /**
-     * Returns an ArrayList of all the elements of the specified level that have been attempted
+     * Returns an ObservableList of all the elements of the specified level that have been attempted
      * @param levelKey
      * @return
      */
-    public ObservableList getLevel(String levelKey) {
+    public ObservableList<Word> getLevel(String levelKey) {
         ObservableList<Word> level = FXCollections.observableArrayList();
         ArrayList<Word> levelWords = _spellingWords.get(levelKey);
         for(Word w : levelWords){
@@ -282,7 +282,8 @@ public class SpellingDatabase implements Serializable{
     public ArrayList<String> getAllLevels() {
         ArrayList<String> levels = new ArrayList<>();
         levels.addAll(_spellingWords.keySet());
-        Collections.sort(levels, new LevelComparator());
+        //Collections.sort(levels, new LevelComparator());
+        Collections.sort(levels);
         return levels;
     }
 
