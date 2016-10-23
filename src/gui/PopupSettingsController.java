@@ -48,12 +48,13 @@ public class PopupSettingsController {
         _voiceSpeedList = FXCollections.observableArrayList("Slow","Normal","Fast");
         _voiceSpeed.setItems(_voiceSpeedList);
 
+        //set ChoiceBox values to current values
         _voiceSelect.setValue(_myParentController.get_voice());
         _voiceSpeed.setValue(_myParentController.get_voiceSpeed());
     }
 
     /**
-     * Returns to title screen
+     * Saves festival.scm file and closes this window.
      * @throws IOException
      * @throws InterruptedException
      */

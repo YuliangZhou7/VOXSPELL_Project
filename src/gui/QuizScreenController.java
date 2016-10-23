@@ -145,7 +145,8 @@ public class QuizScreenController implements ControlledScreen{
     }
 
     /**
-     * TODO:pop up settings for voice
+     * Opens a new pop-up menu which prevents main GUI window from being clicked until the popup is closed.
+     * Pressing "Back" will save the settings. While default close operation will discard changes
      */
     public void openSettingsPopUp() throws IOException {
         _myParentController.buttonClickSound();

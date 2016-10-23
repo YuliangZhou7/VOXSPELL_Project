@@ -8,27 +8,20 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 import javafx.animation.KeyFrame;
-import javafx.animation.FadeTransition;
 
 import javafx.beans.property.DoubleProperty;
 
 
 import javafx.scene.media.AudioClip;
-import javafx.stage.Screen;
 import javafx.util.Duration;
 
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -77,7 +70,7 @@ public class MasterController extends StackPane {
         _currentSpellingList = "Default";
         _voice = "Default";
         _voiceSpeed = "Normal";
-        _buttonPressSound = new AudioClip(MasterController.class.getResource("/resources/audio/Tiny_Button_Push-SoundBible.com-513260752.wav").toString());
+        _buttonPressSound = new AudioClip(MasterController.class.getResource("/resources/audio/Tiny_Button_Push.wav").toString());
         _cheeringSound = new AudioClip(MasterController.class.getResource("/resources/audio/yay.mp3").toString());
         _correctSound = new AudioClip(MasterController.class.getResource("/resources/audio/success.wav").toString());
         _incorrectSound = new AudioClip(MasterController.class.getResource("/resources/audio/incorrect.wav").toString());
