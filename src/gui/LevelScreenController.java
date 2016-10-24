@@ -1,5 +1,6 @@
 package gui;
 
+import data.SpellingDatabase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Tooltip;
 
 import java.util.List;
 import java.util.Set;
@@ -52,6 +54,29 @@ public class LevelScreenController implements ControlledScreen {
     private Button b10;
     @FXML
     private Button b11;
+    @FXML
+    private Tooltip tt1;
+    @FXML
+    private Tooltip tt2;
+    @FXML
+    private Tooltip tt3;
+    @FXML
+    private Tooltip tt4;
+    @FXML
+    private Tooltip tt5;
+    @FXML
+    private Tooltip tt6;
+    @FXML
+    private Tooltip tt7;
+    @FXML
+    private Tooltip tt8;
+    @FXML
+    private Tooltip tt9;
+    @FXML
+    private Tooltip tt10;
+    @FXML
+    private Tooltip tt11;
+
 
     private int _selectedIntLevel;
 
@@ -67,6 +92,7 @@ public class LevelScreenController implements ControlledScreen {
         _quizType.setItems(_quizTypeList);
         _quizType.setValue("New Quiz");
 
+        //when spelling list's value is changed update the current spelling model and update buttons
         _spellingLists.getSelectionModel().selectedItemProperty().addListener(new ChangeListener(){
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
@@ -80,6 +106,7 @@ public class LevelScreenController implements ControlledScreen {
 
     @Override
     public void displayScreen() {
+        //gets all the spelling lists from the master controller and resets the buttons
         List<String> list = _myParentController.getSpellingListKeys();
         ObservableList obList = FXCollections.observableList(list);
         _spellingLists.setItems(obList);
@@ -92,7 +119,20 @@ public class LevelScreenController implements ControlledScreen {
      * And disables the currently selected level button.
      */
     public void setButtons(){
-        //TODO: tooltip - level names
+        //set the tool tip to name of level
+        SpellingDatabase sd = _myParentController.getCurrentSpellilngModel();
+        tt1.setText(sd.getActualKey(1));
+        tt2.setText(sd.getActualKey(2));
+        tt3.setText(sd.getActualKey(3));
+        tt4.setText(sd.getActualKey(4));
+        tt5.setText(sd.getActualKey(5));
+        tt6.setText(sd.getActualKey(6));
+        tt7.setText(sd.getActualKey(7));
+        tt8.setText(sd.getActualKey(8));
+        tt9.setText(sd.getActualKey(9));
+        tt10.setText(sd.getActualKey(10));
+        tt11.setText(sd.getActualKey(11));
+        //reset all buttons to invisible
         b1.setVisible(false);
         b2.setVisible(false);
         b3.setVisible(false);
@@ -104,6 +144,7 @@ public class LevelScreenController implements ControlledScreen {
         b9.setVisible(false);
         b10.setVisible(false);
         b11.setVisible(false);
+        //set only the buttons for levels which are contained by the current spelling list
         Set<Integer> s = _myParentController.getCurrentSpellilngModel().getLevelNumbers();
         for (Integer level :s){
             if(level==1){
@@ -130,6 +171,7 @@ public class LevelScreenController implements ControlledScreen {
                 b11.setVisible(true);
             }
         }
+        //set all buttons to initially enabled
         b1.setDisable(false);
         b2.setDisable(false);
         b3.setDisable(false);
@@ -146,10 +188,20 @@ public class LevelScreenController implements ControlledScreen {
         _quizType.setValue("New Quiz");
     }
 
+    /**
+     * Returns the type of quiz to commence
+     * @param _quizType
+     * @return
+     */
     private String getChoice(ChoiceBox<String> _quizType){
         return _quizType.getValue();
     }
 
+    /**
+     * Sets the button for the level number to disabled, and all other buttons to enabled.
+     * The start quiz button is also enabled once a level is selected.
+     * @param event
+     */
     public void levelButtonPressed(ActionEvent event){
         _myParentController.buttonClickSound();
         b1.setDisable(false);
@@ -169,6 +221,10 @@ public class LevelScreenController implements ControlledScreen {
         _startQuiz.setDisable(false);
     }
 
+    /**
+     * Gets the level selected and sets up the quiz, then transitions into the quiz screen.
+     * @param event
+     */
     public void enterNewQuiz(ActionEvent event){
         _myParentController.buttonClickSound();
 

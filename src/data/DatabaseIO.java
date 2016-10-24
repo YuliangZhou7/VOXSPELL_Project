@@ -89,6 +89,7 @@ public class DatabaseIO {
                 if(line.charAt(0) == '%' ){//get level key
                     levelCounter++;
                     levelKey = line.substring(1);
+                    //add key to the level keys hashmap
                     database.addNewDefaultLevel(levelCounter,levelKey);
                 }else{
                     database.addNewDefaultWord(levelKey, line.trim());
@@ -121,9 +122,10 @@ public class DatabaseIO {
                 if(line.charAt(0) == '%' ){//get level key
                     isSuccessful = true;
                     levelCounter++;
-                    if(levelCounter > 11){
+                    if(levelCounter > 11){ // if there are more than 11 levels then spelling list is invalid
                         return false;
                     }
+                    //update the level key and add it to the level keys hashmap
                     levelKey = line.substring(1);
                     database.addNewLevel(levelCounter,levelKey);
                 }else{

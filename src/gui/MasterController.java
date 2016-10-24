@@ -66,6 +66,7 @@ public class MasterController extends StackPane {
         _currentSpellingList = "Default";
         _voice = "Default";
         _voiceSpeed = "Normal";
+        //load the audio clips
         _buttonPressSound = new AudioClip(MasterController.class.getResource("/resources/audio/Tiny_Button_Push.wav").toString());
         _cheeringSound = new AudioClip(MasterController.class.getResource("/resources/audio/yay.mp3").toString());
         _correctSound = new AudioClip(MasterController.class.getResource("/resources/audio/success.wav").toString());
@@ -162,6 +163,7 @@ public class MasterController extends StackPane {
         _spellingListKeys = _spellingDatabase.getSpellingKeys();
         return _spellingListKeys;
     }
+
 
     public String get_currentSpellingList() {
         return _currentSpellingList;
@@ -277,20 +279,6 @@ public class MasterController extends StackPane {
         } else {
             System.out.println("Screen hasn't been loaded");
             return false;
-        }
-    }
-
-    /**
-     *
-     * @param name
-     * @return
-     */
-    public boolean unloadScreen(Main.Screen name) {
-        if (_screens.remove(name) == null) {
-            System.out.println("Screen doesn't exist");
-            return false;
-        } else {
-            return true;
         }
     }
 

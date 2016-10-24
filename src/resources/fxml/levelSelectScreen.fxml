@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LevelScreenController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="850.0" pickOnBounds="true">
@@ -76,56 +79,89 @@
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt1" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b2" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="2" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt2" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b3" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="3" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt3" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b4" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="4" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt4" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b5" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="5" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt5" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b6" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="6" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt6" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b7" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="7" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt7" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b8" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="8" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt8" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b9" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="9" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt9" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b10" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="10" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt10" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="b11" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="11" textAlignment="CENTER">
                            <font>
                               <Font size="16.0" />
                            </font>
+                           <tooltip>
+                              <Tooltip fx:id="tt11" text="Empty Tooltip" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>

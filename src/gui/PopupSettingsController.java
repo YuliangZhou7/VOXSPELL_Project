@@ -51,6 +51,7 @@ public class PopupSettingsController {
      */
     public void backButtonPressed() throws IOException, InterruptedException {
         _myParentController.buttonClickSound();
+        //get the parameter.set duration
         String newVoiceSpeed;
         if(_voiceSpeed.getValue().equals("Fast")) {
             newVoiceSpeed = "0.75";
@@ -59,7 +60,9 @@ public class PopupSettingsController {
         }else {//normal speed
             newVoiceSpeed = "1.00";
         }
+        //update the second line ( the speed )
         FestivalFileWriter.getInstance().changeSpeed(newVoiceSpeed);
+        //update the voice type
         if((_voiceSelect.getValue()).equals("Default")){
             FestivalFileWriter.getInstance().changeVoice("(voice_kal_diphone)");
         }else if((_voiceSelect.getValue()).equals("New Zealand")){

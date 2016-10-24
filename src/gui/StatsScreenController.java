@@ -106,6 +106,10 @@ public class StatsScreenController implements ControlledScreen{
         _myParentController.setScreen(Main.Screen.TITLE);
     }
 
+    /**
+     * This method is called whenever the spelling list is updated. Will update the choice box for the levels
+     * in that spelling list and then calls the updateCharts method.
+     */
     public void updateScreen(){
         _database = _myParentController.getCurrentSpellilngModel();
 
@@ -120,6 +124,10 @@ public class StatsScreenController implements ControlledScreen{
         updateCharts();
     }
 
+    /**
+     * This method is called whenever the spelling list is choice box selected item is changed
+     * Will update the table and piechart with the new level's data.
+     */
     public void updateCharts(){
         //get all attempted words in level
         _table.setItems(_database.getLevel(_levelSelection.getValue()));
@@ -145,7 +153,7 @@ public class StatsScreenController implements ControlledScreen{
                 new PieChart.Data("Faulted", faultedCount),
                 new PieChart.Data("Failed", failedCount)
          );
-        if(masteredCount==0 && faultedCount==0 && failedCount==0) {
+        if(masteredCount==0 && faultedCount==0 && failedCount==0) { // if there are no words attempted do not display piechart
             _piechart.setVisible(false);
         }else{
             _piechart.setVisible(true);
@@ -155,6 +163,12 @@ public class StatsScreenController implements ControlledScreen{
         }
     }
 
+    /**
+     * Updates each item in the observable list used in the pie chart with the appropriate colours
+     * Green, orange, and red. Mastered, faulted, and failed respectively.
+     * @param pieChartData
+     * @param pieColors
+     */
     private void applyColors(ObservableList<PieChart.Data> pieChartData,String... pieColors) {
         int i = 0;
         for (PieChart.Data data : pieChartData) {

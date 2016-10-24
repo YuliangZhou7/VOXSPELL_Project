@@ -49,20 +49,17 @@ public class PostQuizController implements ControlledScreen{
 
     @Override
     public void displayScreen() {
-        if (_total == 0) {
-            _reviewButton.setDisable(true);
-            _userResultsOne.setText("Congratulations.");
-            _userResultsTwo.setText("Keep up the good work :)");
-        }else {
-            _reviewButton.setDisable(false);
-            _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
-            _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
-        }
-        if(_correct>8){
+        //sets the results text
+        _reviewButton.setDisable(false);
+        _userResultsOne.setText("Congratulations you scored: " + _correct + " of " + _total);
+        _userResultsTwo.setText("Accuracy for  " + _levelInt + ": " + _accuracy + "%");
+
+        if(_correct>8){//when user scores 9 or 10 the video is unlocked
             _playVideoButton.setDisable(false);
         }else{
             _playVideoButton.setDisable(true);
         }
+        //prevents user from progressing up a level if it is the last level or if user did not get 9 or 10 correct
         if( _correct<9 || _myParentController.isLastLevel(_levelInt) ){
             _nextLevelButton.setDisable(true);
         }else{
@@ -126,7 +123,7 @@ public class PostQuizController implements ControlledScreen{
     }
 
     /**
-     *  sets the fields of the test results of the current level.
+     *  Sets the fields of the test results of the current level.
      */
     public void set_testResults(int level, double accuracy, int correct, int total){
         _levelInt = level;
