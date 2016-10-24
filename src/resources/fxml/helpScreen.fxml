@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -51,24 +52,18 @@
                <content>
                   <VBox prefWidth="800.0" spacing="10.0">
                      <children>
-                        <Label text="Welcome">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <TextArea />
                         <Label text="How to play">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextArea />
-                        <Label text="Error Manual">
+                        <TextArea fx:id="_howToPlay" editable="false" wrapText="true" />
+                        <Label text="Custom Spelling List Example">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <TextArea />
+                        <TextArea fx:id="_customListExample" editable="false" wrapText="true" />
                      </children>
                   </VBox>
                </content>

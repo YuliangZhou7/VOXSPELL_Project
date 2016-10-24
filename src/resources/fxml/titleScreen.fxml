@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.*?>
@@ -7,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TitleScreenController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="850.0" pickOnBounds="true">
@@ -18,7 +22,7 @@
          <center>
             <VBox alignment="CENTER" prefHeight="150.0" spacing="30.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="_startButton" alignment="CENTER" mnemonicParsing="false" onAction="#normalQuizPressed" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 20;" text="Normal Quiz">
+                  <Button fx:id="_startButton" alignment="CENTER" mnemonicParsing="false" onAction="#normalQuizPressed" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 20;" text="Begin Quiz">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -66,7 +70,7 @@
                <children>
                   <Label text="Welcome to Yuliang's VOXSPELL" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <Label text="Version 1.1" />
+                  <Label text="Version 1.1.0" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" />

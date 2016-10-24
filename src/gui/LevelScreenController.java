@@ -87,7 +87,12 @@ public class LevelScreenController implements ControlledScreen {
         setButtons();
     }
 
+    /**
+     * This method is called whenever the spelling ChoiceBox is updated. Updates which buttons are visible
+     * And disables the currently selected level button.
+     */
     public void setButtons(){
+        //TODO: tooltip - level names
         b1.setVisible(false);
         b2.setVisible(false);
         b3.setVisible(false);
