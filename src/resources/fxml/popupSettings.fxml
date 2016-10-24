@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<BorderPane prefHeight="340.0" prefWidth="320.0" style="-fx-background-color: #0099cc;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.PopupSettingsController">
+   <bottom>
+      <HBox prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#backButtonPressed" prefWidth="100.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Back">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Back-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Save settings and return to quiz" />
+               </tooltip>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label prefWidth="100.0" text="Voice" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="_voiceSelect" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: ffffff;" />
+               </children>
+            </HBox>
+            <HBox prefWidth="200.0">
+               <children>
+                  <Label prefWidth="120.0" text="Voice Speed" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <ChoiceBox fx:id="_voiceSpeed" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: ffffff;" />
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="20.0" right="20.0" top="30.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="30.0" />
+         </BorderPane.margin>
+      </Text>
+   </top>
+</BorderPane>

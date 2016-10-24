@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LevelScreenController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="850.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/background.png" />
+         </image>
+      </ImageView>
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <bottom>
+            <HBox spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#backButtonPressed" prefWidth="100.0" style="-fx-background-color: ffffff; -fx-background-radius: 20;" text="Back">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Back-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </padding>
+            </HBox>
+         </bottom>
+         <top>
+            <Label text="Level Select" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </Label>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox spacing="20.0">
+                     <children>
+                        <Label text="Spelling List: ">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="_spellingLists" prefHeight="30.0" prefWidth="200.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="120.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <Label text="Level Selection: ">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="16.0">
+                     <children>
+                        <Button fx:id="b1" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="1" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b2" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="2" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b3" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="3" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b4" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="4" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b5" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="5" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b6" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="6" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b7" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="7" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b8" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="8" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b9" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="9" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b10" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="10" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="b11" alignment="CENTER" mnemonicParsing="false" onAction="#levelButtonPressed" prefHeight="50.0" prefWidth="60.0" style="-fx-background-radius: 20; -fx-background-color: ffffff;" text="11" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" spacing="20.0">
+                     <children>
+                        <Label text="Quiz Type:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="_quizType" prefHeight="30.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="_startQuiz" mnemonicParsing="false" onAction="#enterNewQuiz" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: c7f392; -fx-background-radius: 50;" text="Start Quiz">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
