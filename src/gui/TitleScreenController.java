@@ -61,11 +61,17 @@ public class TitleScreenController implements ControlledScreen{
         _myParentController.setScreen(Main.Screen.SETTINGS);
     }
 
+    /**
+     * Request main screen controller to switch to the help screen
+     */
     public void helpButtonPressed(){
         _myParentController.buttonClickSound();
-        //TODO: add help screen
+        _myParentController.setScreen(Main.Screen.HELP);
     }
 
+    /**
+     * Confirms close operation and saves serialized data.
+     */
     public void quitButtonPressed(){
         _myParentController.buttonClickSound();
         _myParentController.confirmCloseProgram();

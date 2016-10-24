@@ -1,22 +1,13 @@
 package gui;
 
 import data.FestivalFileWriter;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * This is the controller for that settingsScreen.fxml. In this Screen it is possible to change the type of voice

@@ -1,7 +1,6 @@
 package data;
 
 import gui.DialogBox;
-import gui.Main;
 
 import java.io.*;
 

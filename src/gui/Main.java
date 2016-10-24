@@ -5,9 +5,14 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
+/**
+ * Main application launcher. Loads in all the screens and sets the initial screen to
+ * the title screen
+ *
+ * Created by Yuliang Zhou 24/9/2016
+ */
 public class Main extends Application {
 
     private MasterController _mainContainer;
@@ -15,7 +20,7 @@ public class Main extends Application {
     private static Stage _stage;
 
     //Set enums for each screen that has been loaded.
-    public enum Screen{TITLE,QUIZ,LEVELSELECT,POSTQUIZ,SETTINGS,STATS,VIDEO};
+    public enum Screen{TITLE,QUIZ,LEVELSELECT,POSTQUIZ,SETTINGS,STATS,VIDEO,HELP};
 
     public static final String titleScreenFXML = "/resources/fxml/titleScreen.fxml";
     public static final String quizScreenFXML = "/resources/fxml/quizScreen.fxml";
@@ -24,12 +29,13 @@ public class Main extends Application {
     public static final String levelScreenFXML = "/resources/fxml/levelSelectScreen.fxml";
     public static final String postQuizScreenFXML = "/resources/fxml/postQuizScreen.fxml";
     public static final String videoPlayerFXML = "/resources/fxml/videoPlayer.fxml";
+    public static final String helpScreenFXML = "/resources/fxml/helpScreen.fxml";
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         _stage = primaryStage;
-        //loading in all the screens in the main container.
+        //load in all the screens in the main container.
         _mainContainer = new MasterController();
         _mainContainer.loadScreen(Screen.TITLE,titleScreenFXML);
         _mainContainer.loadScreen(Screen.QUIZ,quizScreenFXML);
@@ -38,6 +44,7 @@ public class Main extends Application {
         _mainContainer.loadScreen(Screen.LEVELSELECT,levelScreenFXML);
         _mainContainer.loadScreen(Screen.POSTQUIZ,postQuizScreenFXML);
         _mainContainer.loadScreen(Screen.VIDEO,videoPlayerFXML);
+        _mainContainer.loadScreen(Screen.HELP,helpScreenFXML);
 
         //set the screen on launch to the TITLE screen.
         _mainContainer.setScreen(Screen.TITLE);

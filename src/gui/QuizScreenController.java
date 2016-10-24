@@ -4,14 +4,11 @@ import data.FestivalFileWriter;
 import data.SpellingDatabase;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,7 +23,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 /**
  * Main controller for both normal quiz mode and review quiz mode.
